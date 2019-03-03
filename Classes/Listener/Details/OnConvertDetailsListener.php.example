@@ -1,0 +1,76 @@
+<?php declare(strict_types = 1);
+/**
+ * @package     composertoolbox
+ * @filesource  OnConvertDetailsListener.php
+ * @version     1.0.0
+ * @since       03.03.2019 - 17:05
+ * @author      Patrick Froch <info@easySolutionsIT.de>
+ * @see         http://easySolutionsIT.de
+ * @copyright   e@sy Solutions IT 2019
+ * @license     EULA
+ */
+namespace Esit\Composertoolbox\Classes\Listener\Details;
+
+use Esit\Composertoolbox\Classes\Events\Details\OnGenerateDetailsEvent;
+
+/**
+ * Class OnConvertDetailsListener
+ * @package Esit\Composertoolbox\Classes\Listener\Details
+ */
+class OnConvertDetailsListener
+{
+
+
+    /**
+     * Erstellt die Abfrage für das Laden der Daten aus der Datenbank
+     * @param OnGenerateDetailsEvent $event
+     */
+    public function generateQuery(OnGenerateDetailsEvent $event): void
+    {
+        $table  = $event->getTable();
+        $id     = $event->getId();
+        $query  = $event->getQuery();
+        $query->select('*')
+            ->from($table)
+            ->where("id = $id");
+
+        $event->setQuery($query);
+    }
+
+
+    /**
+     * Erweitert die Abfrage
+     * @param OnGenerateDetailsEvent $event
+     */
+    public function addPredefinedFilter(OnGenerateDetailsEvent $event): void
+    {
+        $query              = $event->getQuery();
+        $predefinedfilter   = $event->getPredefinedfilter();
+
+        if (null !== $query && '' !== $predefinedfilter) {
+            $predefinedfilter = \html_entity_decode($predefinedfilter);
+            $query->andWhere($predefinedfilter);
+        }
+
+        $event->setQuery($query);
+    }
+
+
+    /**
+     * Lädt die Daten aus der Datenbank
+     * @param OnGenerateDetailsEvent $event
+     */
+    public function loadDataFromDb(OnGenerateDetailsEvent $event): void
+    {
+        $query = $event->getQuery();
+
+        if (null !== $query) {
+            $result = $query->execute();
+            $data   = $result->fetch(\PDO::FETCH_ASSOC);
+
+            if (false !== $data) {
+                $event->setData($data);
+            }
+        }
+    }
+}

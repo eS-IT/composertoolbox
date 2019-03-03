@@ -1,0 +1,22 @@
+stages:
+    - test
+#    - build
+
+
+runtests:
+    stage: test
+    except:
+        - tags
+    image: php:7.2
+    before_script:
+        - apt-get update -qq -o Dpkg::Use-Pty=0
+        - apt-get install -qq -y -o Dpkg::Use-Pty=0 git libbz2-dev libfreetype6-dev libjpeg62-turbo-dev libpng-dev libicu-dev zlib1g-dev
+        - docker-php-ext-install bz2
+        - docker-php-ext-configure gd --with-freetype-dir=/usr/include/ --with-jpeg-dir=/usr/include/ && docker-php-ext-install -j$(nproc) gd
+        - docker-php-ext-configure intl
+        - docker-php-ext-install intl
+        - docker-php-ext-install zip
+        - curl -sS https://getcomposer.org/installer | php
+        - ./composer.phar install
+    script:
+        - ./build/runtests.sh

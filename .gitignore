@@ -1,0 +1,14 @@
+# .gitignore by e@sy Solutions IT
+# ===============================
+# author      pfroch <info@easySolutionsIT.de>
+# link        http://easySolutionsIT.de
+# copyright   e@sy Solutions IT 2019
+# license     EULA
+# package     composertoolbox
+# filesource  .gitignore
+# version     1.0.0
+# since       03.03.19 - 17:10
+
+*.cache
+autoload*
+vendor/

@@ -1,0 +1,29 @@
+{
+    "name": "esit/composertoolbox",
+    "description": "Es handelt sich um eine Erweiterung für das Open Source CMS Contao",
+    "license": "proprietary",
+    "type": "contao-bundle",
+    "authors": [
+        {
+            "name": "Patrick Froch",
+            "email": "info@easySolutionsIT.de",
+            "homepage": "http://easySolutionsIT.de",
+            "role": "Developer"
+        }
+    ],
+    "support": {
+        "email": "info@easySolutionsIT.de"
+    },
+    "require": {
+        "php": ">=7.1",
+        "contao/core-bundle": "~4.4"
+    },
+    "autoload": {
+        "psr-4": {
+            "Esit\\Composertoolbox\\": ""
+        }
+    },
+    "extra": {
+        "contao-manager-plugin": "Esit\\Composertoolbox\\Classes\\Contao\\Manager\\Plugin"
+    }
+}

@@ -1,0 +1,54 @@
+<?php declare(strict_types = 1);
+/**
+ * @package     Composertoolbox
+ * @filesource  OnConvertDetailsEvent.php
+ * @version     1.0.0
+ * @since       03.03.2019 - 17:05
+ * @author      Patrick Froch <info@easySolutionsIT.de>
+ * @see         http://easySolutionsIT.de
+ * @copyright   e@sy Solutions IT 2019
+ * @license     EULA
+ */
+namespace Esit\Composertoolbox\Classes\Events\Details;
+
+use Doctrine\DBAL\Query\QueryBuilder;
+use Symfony\Component\EventDispatcher\Event;
+
+/**
+ * Class OnConvertDetailsEvent
+ * @package Esit\Composertoolbox\Classes\Events\Details
+ */
+class OnConvertDetailsEvent extends Event
+{
+
+
+    /**
+     * Name des Events
+     */
+    public const NAME = 'on.convert.details.event';
+
+
+    /**
+     * Tabelle aus der die Daten geladen werden
+     * @var string
+     */
+    protected $table = '';
+
+
+    /**
+     * @return string
+     */
+    public function getTable(): string
+    {
+        return $this->table;
+    }
+
+
+    /**
+     * @param string $table
+     */
+    public function setTable(string $table): void
+    {
+        $this->table = $table;
+    }
+}

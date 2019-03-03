@@ -1,0 +1,14 @@
+# EventListener
+services:
+
+    ##
+    # DetailListener
+    ##
+
+
+    # OnGenerateListListener
+#    esit_composertoolbox.listener.on_convert_details_listener.generate_query:
+#        class: Esit\Composertoolbox\Classes\Listener\Details\OnConvertDetailsListener
+#        arguments: []
+#        tags:
+#            - { name: kernel.event_listener, event: on.convert.details.event, method: generateQuery, priority: 1024 }
