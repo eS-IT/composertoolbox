@@ -42,11 +42,11 @@ class OnHandleImportListener
             $uploadEvent = new OnHandleUploadedFileEvent();
             $uploadEvent->setFile($files[$datafield]);
             $uploadEvent->setSignature($signature);
+            $uploadEvent->setErrors($errors);
 
             $di->dispatch($uploadEvent::NAME, $uploadEvent);
 
-            $errors = \array_merge($errors, $uploadEvent->getErrors());
-            $event->setErrors($errors);
+            $event->setErrors($uploadEvent->getErrors());
             $event->setContent($uploadEvent->getContent());
         }
     }
@@ -72,11 +72,11 @@ class OnHandleImportListener
             $dbEvent->setDatafield($event->getDatafield());
             $dbEvent->setContent($content);
             $dbEvent->setSignature($signature);
+            $dbEvent->setErrors($errors);
 
             $di->dispatch($dbEvent::NAME, $dbEvent);
 
-            $errors = \array_merge($errors, $dbEvent->getErrors());
-            $event->setErrors($errors);
+            $event->setErrors($dbEvent->getErrors());
             $event->setSignatureCount($dbEvent->getSignatureCount());
         }
     }
@@ -95,14 +95,13 @@ class OnHandleImportListener
         $signatureCount = $event->getSignatureCount();
 
         if ('' !== $content && 0 === $signatureCount) {
-            $ComposerEvent = new OnHandleComposerJsonEvent();
-            $ComposerEvent->setContentString($content);
+            $composerEvent = new OnHandleComposerJsonEvent();
+            $composerEvent->setContentString($content);
+            $composerEvent->setErrors($errors);
 
-            $di->dispatch($ComposerEvent::NAME, $ComposerEvent);
+            $di->dispatch($composerEvent::NAME, $composerEvent);
 
-            $errors = \array_merge($errors, $ComposerEvent->getErrors());
+            $event->setErrors($composerEvent->getErrors());
         }
-
-        $event->setErrors($errors);
     }
 }

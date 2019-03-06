@@ -60,6 +60,7 @@ class OnHandleComposerJsonListener
 
             if (\is_array($content)) {
                 $event->setComposerContent($content);
+                $event->setMergedContent($content); // Alten Inhalt der composer.json übernehmen!
             }
         }
     }
@@ -86,8 +87,6 @@ class OnHandleComposerJsonListener
         ) {
             // Nur ausführen, wenn noch nichts gemerged wurde!
             // Ist bereits etwas in $newontent, die Verarbeitugn auslassen!
-
-            $newContent = $comopsoer;   // Alten Inhalt der composer.json übernehmen!
 
             foreach ($allowedFields as $field) {
                 if (isset($content[$field])) {
