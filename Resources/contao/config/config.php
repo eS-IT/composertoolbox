@@ -56,6 +56,10 @@
  * have to be set. Take a look at the system/modules/core/config/config.php
  * file to see how back end modules are configured.
  */
+$GLOBALS['BE_MOD']['esit']['composertoolbox'] = [
+    'tables'    => ['tl_composeerpackages'],
+    'insert'    => [\Esit\Composertoolbox\Classes\Contao\Dca\TlComposeerpackages::class, 'compile']
+];
 
 
 /**

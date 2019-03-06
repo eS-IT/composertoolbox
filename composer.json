@@ -16,6 +16,8 @@
     },
     "require": {
         "php": ">=7.1",
+        "ext-pdo": "*",
+        "ext-json": "*",
         "contao/core-bundle": "~4.4"
     },
     "autoload": {

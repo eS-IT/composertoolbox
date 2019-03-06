@@ -1,14 +1,110 @@
 # EventListener
 services:
 
+
     ##
-    # DetailListener
+    # OnHandleImport
     ##
 
+    # OnHandleImportListener
+    esit_composertoolbox.listener.composertoolbox_on_handle_import.load_file_content:
+        class: Esit\Composertoolbox\Classes\Listener\Import\OnHandleImportListener
+        arguments: []
+        tags:
+            - { name: kernel.event_listener, event: composertoolbox.on.handle.import.event, method: loadFileContent, priority: 3072 }
 
-    # OnGenerateListListener
-#    esit_composertoolbox.listener.on_convert_details_listener.generate_query:
-#        class: Esit\Composertoolbox\Classes\Listener\Details\OnConvertDetailsListener
-#        arguments: []
-#        tags:
-#            - { name: kernel.event_listener, event: on.convert.details.event, method: generateQuery, priority: 1024 }
+    esit_composertoolbox.listener.composertoolbox_on_handle_import.handle_database_query:
+        class: Esit\Composertoolbox\Classes\Listener\Import\OnHandleImportListener
+        arguments: []
+        tags:
+            - { name: kernel.event_listener, event: composertoolbox.on.handle.import.event, method: handleDatabaseQuery, priority: 2048 }
+
+    esit_composertoolbox.listener.composertoolbox_on_handle_import.handle_composer_json:
+        class: Esit\Composertoolbox\Classes\Listener\Import\OnHandleImportListener
+        arguments: []
+        tags:
+            - { name: kernel.event_listener, event: composertoolbox.on.handle.import.event, method: handleComposerJson, priority: 1024 }
+
+
+    ##
+    # OnHandleUploadedFile
+    ##
+
+    # OnHandleUploadedFileListener
+    esit_composertoolbox.listener.composertoolbox_on_handle_uploaded_file.check_upload:
+        class: Esit\Composertoolbox\Classes\Listener\Import\OnHandleUploadedFileListener
+        arguments: []
+        tags:
+            - { name: kernel.event_listener, event: composertoolbox.on.handle.uploaded.file.event, method: checkUpload, priority: 4096 }
+
+    esit_composertoolbox.listener.composertoolbox_on_handle_uploaded_file.check_filetype:
+        class: Esit\Composertoolbox\Classes\Listener\Import\OnHandleUploadedFileListener
+        arguments: []
+        tags:
+            - { name: kernel.event_listener, event: composertoolbox.on.handle.uploaded.file.event, method: checkFiletype, priority: 3072 }
+
+    esit_composertoolbox.listener.composertoolbox_on_handle_uploaded_file.check_signature:
+        class: Esit\Composertoolbox\Classes\Listener\Import\OnHandleUploadedFileListener
+        arguments: []
+        tags:
+            - { name: kernel.event_listener, event: composertoolbox.on.handle.uploaded.file.event, method: checkSignature, priority: 2048 }
+
+    esit_composertoolbox.listener.composertoolbox_on_handle_uploaded_file.load_file_content:
+        class: Esit\Composertoolbox\Classes\Listener\Import\OnHandleUploadedFileListener
+        arguments: []
+        tags:
+            - { name: kernel.event_listener, event: composertoolbox.on.handle.uploaded.file.event, method: loadFileContent, priority: 1024 }
+
+
+    ##
+    # OnHandelDatabaseQueries
+    ##
+
+    # OnHandelDatabaseQueriesListener
+    esit_composertoolbox.listener.composertoolbox_on_handle_database_queries.check_signature_in_db:
+        class: Esit\Composertoolbox\Classes\Listener\Import\OnHandelDatabaseQueriesListener
+        arguments: ["@database_connection"]
+        tags:
+            - { name: kernel.event_listener, event: composertoolbox.on.handle.database.queries.event, method: checkSignatureInDb, priority: 2048 }
+
+    esit_composertoolbox.listener.composertoolbox_on_handle_database_queries.save_data_into_db:
+        class: Esit\Composertoolbox\Classes\Listener\Import\OnHandelDatabaseQueriesListener
+        arguments: ["@database_connection"]
+        tags:
+            - { name: kernel.event_listener, event: composertoolbox.on.handle.database.queries.event, method: saveDataIntoDb, priority: 1024 }
+
+
+    ##
+    # OnHandleComposerJson
+    ##
+
+    # OnHandleComposerJsonListener
+    esit_composertoolbox.listener.composertoolbox_on_handle_composer_json.set_filename:
+        class: Esit\Composertoolbox\Classes\Listener\Import\OnHandleComposerJsonListener
+        arguments: []
+        tags:
+            - { name: kernel.event_listener, event: composertoolbox.on.handle.composer.json.event, method: setFilename, priority: 5120 }
+
+    esit_composertoolbox.listener..composertoolbox_on_handle_composer_json.parse_uploaded_content:
+        class: Esit\Composertoolbox\Classes\Listener\Import\OnHandleComposerJsonListener
+        arguments: []
+        tags:
+            - { name: kernel.event_listener, event: composertoolbox.on.handle.composer.json.event, method: parseUploadedContent, priority: 4096 }
+
+    esit_composertoolbox.listener..composertoolbox_on_handle_composer_json.load_composer_json:
+        class: Esit\Composertoolbox\Classes\Listener\Import\OnHandleComposerJsonListener
+        arguments: []
+        tags:
+            - { name: kernel.event_listener, event: composertoolbox.on.handle.composer.json.event, method: loadComposerJson, priority: 3072 }
+
+    esit_composertoolbox.listener..composertoolbox_on_handle_composer_json.merge_arrays:
+        class: Esit\Composertoolbox\Classes\Listener\Import\OnHandleComposerJsonListener
+        arguments: []
+        tags:
+            - { name: kernel.event_listener, event: composertoolbox.on.handle.composer.json.event, method: mergeArrays, priority: 2048 }
+
+    esit_composertoolbox.listener..composertoolbox_on_handle_composer_json.save_composer_json:
+        class: Esit\Composertoolbox\Classes\Listener\Import\OnHandleComposerJsonListener
+        arguments: []
+        tags:
+            - { name: kernel.event_listener, event: composertoolbox.on.handle.composer.json.event, method: saveComposerJson, priority: 1024 }
