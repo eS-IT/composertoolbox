@@ -110,12 +110,12 @@ class OnHandleComposerJsonListener
      */
     public function saveComposerJson(OnHandleComposerJsonEvent $event): void
     {
-        $errors     = $event->getErrors();
+        $errors = $event->getErrors();
 
         if (0 === \count($errors)) {
             $file       = $event->getFilename();
             $newContent = $event->getMergedContent();
-            $newContent = \json_encode($newContent, \JSON_PRETTY_PRINT);
+            $newContent = \json_encode($newContent, \JSON_PRETTY_PRINT | \JSON_UNESCAPED_SLASHES);
             $rtn        = \file_put_contents($file, $newContent);
 
             if (false === $rtn) {
