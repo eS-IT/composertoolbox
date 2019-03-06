@@ -68,8 +68,9 @@ $GLOBALS['TL_DCA'][$strName] = array
         ),
         'label'             => array
         (
-            'fields' => array('importtime'),
-            'format' => '%s'
+            'fields'            => array('importtime'),
+            'format'            => '%s',
+            'label_callback'    => [Esit\Composertoolbox\Classes\Contao\Callbacks\TlComposeerpackages::class, 'addPackageToLabel']
         ),
         'global_operations' => array
         (/*

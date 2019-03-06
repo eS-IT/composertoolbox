@@ -40,7 +40,7 @@
                     <h2><?php echo $this->langOutput['errorheadline']; ?></h2>
                     <ul>
                         <?php foreach ($this->errors as $err): ?>
-                            <li><?php echo $this->langOutput[$err]; ?></li>
+                            <li><?php echo $this->langOutput[$err] ?: $err; ?></li>
                         <?php endforeach; ?>
                     </ul>
                 </div>

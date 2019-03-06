@@ -62,14 +62,27 @@ class OnHandelDatabaseQueriesListener
      */
     public function saveDataIntoDb(OnHandelDatabaseQueriesEvent $event): void
     {
+        $errors = $event->getErrors();
+
         if (0 === $event->getSignatureCount()) {
             $table      = $event->getTable();
             $signature  = $event->getSignature();
             $content    = $event->getContent();
-            $query      = $this->connection->createQueryBuilder();
-            $query->insert($table)->values(['importtime' => '?', 'importhash' => '?', 'importdata' => '?']);
-            $query->setParameters([\time(), $signature, $content]);
-            $query->execute();
+
+            if ('' !== $signature && '' !== $content) {
+                if (\substr_count($content, 'require') || \substr_count($content, 'repository')) {
+                    $query = $this->connection->createQueryBuilder();
+                    $query->insert($table)->values(['importtime' => '?', 'importhash' => '?', 'importdata' => '?']);
+                    $query->setParameters([\time(), $signature, $content]);
+                    $query->execute();
+                } else {
+                    $errors[] = 'novalidsections';
+                }
+            }
+        } else {
+            $errors[] = 'signaturenotunique';
         }
+
+        $event->setErrors($errors);
     }
 }

@@ -46,6 +46,7 @@ $GLOBALS['TL_LANG']['MSC']['composerimport']['output']['nojsonfile']        = 'U
 $GLOBALS['TL_LANG']['MSC']['composerimport']['output']['hasherror']         = 'Die Sigatur stimmt nicht mit der hoch geladenen Datei über ein! Bitte laden Sie eine JSON-Datei hoch und gebe Sie die dazugehörige Sigatur an!';
 $GLOBALS['TL_LANG']['MSC']['composerimport']['output']['nodataerror']       = 'Es wurde keine gültigen Daten gefunden!';
 $GLOBALS['TL_LANG']['MSC']['composerimport']['output']['signaturenotunique']= 'Signatur schon vorhanden! Das mehrfache Importieren eine Konfiguration wird nicht unterstützt. Bitte löschen Sie zu erst die vorhandene Konfiguration mit dieser Signatur.';
+$GLOBALS['TL_LANG']['MSC']['composerimport']['output']['novalidsections']   = 'Es wurde keine erlaubten Abschnitte in der zu importierenden JSON-Datei gefunden!';
 
 /**
  * Content Elemente

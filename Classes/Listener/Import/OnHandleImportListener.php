@@ -72,11 +72,8 @@ class OnHandleImportListener
 
             $di->dispatch($dbEvent::NAME, $dbEvent);
 
-            if (0 !== $dbEvent->getSignatureCount()) {
-                $errors[] = 'signaturenotunique';
-                $event->setErrors($errors);
-            }
-
+            $errors = \array_merge($errors, $dbEvent->getErrors());
+            $event->setErrors($errors);
             $event->setSignatureCount($dbEvent->getSignatureCount());
         }
     }

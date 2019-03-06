@@ -38,7 +38,11 @@ class OnHandleComposerJsonListener
     public function parseUploadedContent(OnHandleComposerJsonEvent $event): void
     {
         $content = $event->getContentString();
-        $event->setContent(\json_decode($content, true));
+        $content = \json_decode($content, true);
+
+        if (\is_array($content)) {
+            $event->setContent($content);
+        }
     }
 
 
@@ -67,24 +71,25 @@ class OnHandleComposerJsonListener
      */
     public function mergeArrays(OnHandleComposerJsonEvent $event): void
     {
-        $content    = $event->getContent();
-        $comopsoer  = $event->getComposerContent();
-        $newContent = $event->getMergedContent();
-        $fields     = $event->getAllowdFields();
+        $content        = $event->getContent();
+        $comopsoer      = $event->getComposerContent();
+        $newContent     = $event->getMergedContent();
+        $allowedFields  = $event->getAllowdFields();
 
         if (\is_array($content) &&
             \is_array($comopsoer) &&
-            \is_array($fields) &&
+            \is_array($allowedFields) &&
             \count($content) &&
             \count($comopsoer) &&
-            \count($fields) &&
+            \count($allowedFields) &&
             !\count($newContent)
         ) {
-            // Nur ausführen, wenn noch nichts gemergd wurde!
+            // Nur ausführen, wenn noch nichts gemerged wurde!
             // Ist bereits etwas in $newontent, die Verarbeitugn auslassen!
-            $newContent = $comopsoer;
 
-            foreach ($fields as $field) {
+            $newContent = $comopsoer;   // Alten Inhalt der composer.json übernehmen!
+
+            foreach ($allowedFields as $field) {
                 if (isset($content[$field])) {
                     if (isset($newContent[$field])) {
                         $newContent[$field] = \array_merge($newContent[$field], $content[$field]);
