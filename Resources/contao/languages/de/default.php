@@ -33,20 +33,20 @@
 /**
  * Miscellaneous
  */
-$GLOBALS['TL_LANG']['MSC']['composerimport']['output']['back']              = 'Zurück';
-$GLOBALS['TL_LANG']['MSC']['composerimport']['output']['import']            = 'Import';
-$GLOBALS['TL_LANG']['MSC']['composerimport']['output']['hash']              = 'Sigatur';
-$GLOBALS['TL_LANG']['MSC']['composerimport']['output']['data']              = 'Datei';
-$GLOBALS['TL_LANG']['MSC']['composerimport']['output']['hashplaceholder']   = 'Bitte geben Sie die Sigatur der Datei ein!';
-$GLOBALS['TL_LANG']['MSC']['composerimport']['output']['uploadplaceholder'] = 'Bitte wählen Sie die Datei mit den Daten aus!';
-$GLOBALS['TL_LANG']['MSC']['composerimport']['output']['inputheadline']     = 'Folgende Daten wurden importiert';
-$GLOBALS['TL_LANG']['MSC']['composerimport']['output']['errorheadline']     = 'Es ist ein Fehler aufgetreten!';
-$GLOBALS['TL_LANG']['MSC']['composerimport']['output']['nofile']            = 'Es wurde keine Datei hochgeladen! Bitte laden Sie eine JSON-Datei hoch!';
-$GLOBALS['TL_LANG']['MSC']['composerimport']['output']['nojsonfile']        = 'Ungültiges Format der hoch geladenen Datei! Bitte laden Sie eine JSON-Datei hoch!';
-$GLOBALS['TL_LANG']['MSC']['composerimport']['output']['hasherror']         = 'Die Sigatur stimmt nicht mit der hoch geladenen Datei über ein! Bitte laden Sie eine JSON-Datei hoch und gebe Sie die dazugehörige Sigatur an!';
-$GLOBALS['TL_LANG']['MSC']['composerimport']['output']['nodataerror']       = 'Es wurde keine gültigen Daten gefunden!';
-$GLOBALS['TL_LANG']['MSC']['composerimport']['output']['signaturenotunique']= 'Signatur schon vorhanden! Das mehrfache Importieren eine Konfiguration wird nicht unterstützt. Bitte löschen Sie zu erst die vorhandene Konfiguration mit dieser Signatur.';
-$GLOBALS['TL_LANG']['MSC']['composerimport']['output']['novalidsections']   = 'Es wurde keine erlaubten Abschnitte in der zu importierenden JSON-Datei gefunden!';
+$GLOBALS['TL_LANG']['MSC']['composerimport']['output']['back']                  = 'Zurück';
+$GLOBALS['TL_LANG']['MSC']['composerimport']['output']['import']                = 'Import';
+$GLOBALS['TL_LANG']['MSC']['composerimport']['output']['signature']             = 'Sigatur';
+$GLOBALS['TL_LANG']['MSC']['composerimport']['output']['data']                  = 'Datei';
+$GLOBALS['TL_LANG']['MSC']['composerimport']['output']['signatureplaceholder']  = 'Bitte geben Sie die Sigatur der Datei ein!';
+$GLOBALS['TL_LANG']['MSC']['composerimport']['output']['uploadplaceholder']     = 'Bitte wählen Sie die Datei mit den Daten aus!';
+$GLOBALS['TL_LANG']['MSC']['composerimport']['output']['inputheadline']         = 'Folgende Daten wurden importiert';
+$GLOBALS['TL_LANG']['MSC']['composerimport']['output']['errorheadline']         = 'Es ist ein Fehler aufgetreten!';
+$GLOBALS['TL_LANG']['MSC']['composerimport']['output']['nofile']                = 'Es wurde keine Datei hochgeladen! Bitte laden Sie eine JSON-Datei hoch!';
+$GLOBALS['TL_LANG']['MSC']['composerimport']['output']['nojsonfile']            = 'Ungültiges Format der hoch geladenen Datei! Bitte laden Sie eine JSON-Datei hoch!';
+$GLOBALS['TL_LANG']['MSC']['composerimport']['output']['signatureerror']        = 'Die Sigatur stimmt nicht mit der hoch geladenen Datei über ein! Bitte laden Sie eine JSON-Datei hoch und gebe Sie die dazugehörige Sigatur an!';
+$GLOBALS['TL_LANG']['MSC']['composerimport']['output']['nodataerror']           = 'Es wurde keine gültigen Daten gefunden!';
+$GLOBALS['TL_LANG']['MSC']['composerimport']['output']['signaturenotunique']    = 'Signatur schon vorhanden! Das mehrfache Importieren eine Konfiguration wird nicht unterstützt. Bitte löschen Sie zu erst die vorhandene Konfiguration mit dieser Signatur.';
+$GLOBALS['TL_LANG']['MSC']['composerimport']['output']['novalidsections']       = 'Es wurde keine erlaubten Abschnitte in der zu importierenden JSON-Datei gefunden!';
 
 /**
  * Content Elemente

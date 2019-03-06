@@ -34,7 +34,7 @@ class OnHandleImportListener
     public function loadFileContent(OnHandleImportEvent $event, $name, EventDispatcherInterface $di): void
     {
         $files      = $event->getFiles();
-        $datafield  = $event->getNameDatafield();
+        $datafield  = $event->getDatafield();
         $signature  = $event->getSignature();
         $errors     = $event->getErrors();
 
@@ -66,7 +66,10 @@ class OnHandleImportListener
 
         if ('' !== $content && '' !== $signature && 0 === \count($errors)) {
             $dbEvent = new OnHandelDatabaseQueriesEvent();
-            $dbEvent->setTable('tl_composeerpackages');
+            $dbEvent->setTable($event->getTable());
+            $dbEvent->setTimefield($event->getTimefield());
+            $dbEvent->setSignaturfield($event->getSignaturfield());
+            $dbEvent->setDatafield($event->getDatafield());
             $dbEvent->setContent($content);
             $dbEvent->setSignature($signature);
 

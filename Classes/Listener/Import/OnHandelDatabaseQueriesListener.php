@@ -47,7 +47,8 @@ class OnHandelDatabaseQueriesListener
         $table      = $event->getTable();
         $signature  = $event->getSignature();
         $query      = $this->connection->createQueryBuilder();
-        $query->select('COUNT(id) AS count')->from($table)->where("importhash = '$signature'");
+        $sigField   = $event->getSignaturfield();
+        $query->select('COUNT(id) AS count')->from($table)->where("$sigField = '$signature'");
         $result     = $query->execute();
         $data       = $result->fetch(\PDO::FETCH_ASSOC);
         $count      = (int) $data['count'];
@@ -68,11 +69,14 @@ class OnHandelDatabaseQueriesListener
             $table      = $event->getTable();
             $signature  = $event->getSignature();
             $content    = $event->getContent();
+            $timeField  = $event->getTimefield();
+            $sigField   = $event->getSignaturfield();
+            $dataField  = $event->getDatafield();
 
             if ('' !== $signature && '' !== $content) {
                 if (\substr_count($content, 'require') || \substr_count($content, 'repository')) {
                     $query = $this->connection->createQueryBuilder();
-                    $query->insert($table)->values(['importtime' => '?', 'importhash' => '?', 'importdata' => '?']);
+                    $query->insert($table)->values([$timeField => '?', $sigField => '?', $dataField => '?']);
                     $query->setParameters([\time(), $signature, $content]);
                     $query->execute();
                 } else {

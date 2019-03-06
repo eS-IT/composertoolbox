@@ -75,7 +75,7 @@ class OnHandleUploadedFileListener
             $fileHash = \hash_file($algo, $fileName);
 
             if ($fileHash !== $signature) {
-                $errors[] = 'hasherror';
+                $errors[] = 'signatureerror';
                 $event->stopPropagation();
             }
         }

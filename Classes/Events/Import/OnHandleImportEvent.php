@@ -28,6 +28,13 @@ class OnHandleImportEvent extends Event
 
 
     /**
+     * Name der Tabelle, in der die Daten gespeichert werden
+     * @var string
+     */
+    protected $table = '';
+
+
+    /**
      * Inhalt von $_FILES
      * @var array
      */
@@ -35,10 +42,24 @@ class OnHandleImportEvent extends Event
 
 
     /**
-     * Name des Formularfelds für den Upload
+     * Name des Datenbankfelds für die Importzeit.
      * @var string
      */
-    protected $nameDatafield = '';
+    protected $timefield = '';
+
+
+    /**
+     * Name des Dantenbankfelds für die Signatur.
+     * @var string
+     */
+    protected $signaturfield = '';
+
+
+    /**
+     * Name des Datenbankfelds für die Importdaten.
+     * @var string
+     */
+    protected $datafield = '';
 
 
     /**
@@ -91,18 +112,72 @@ class OnHandleImportEvent extends Event
     /**
      * @return string
      */
-    public function getNameDatafield(): string
+    public function getTable(): string
     {
-        return $this->nameDatafield;
+        return $this->table;
     }
 
 
     /**
-     * @param string $nameDatafield
+     * @return string
      */
-    public function setNameDatafield(string $nameDatafield): void
+    public function getTimefield(): string
     {
-        $this->nameDatafield = $nameDatafield;
+        return $this->timefield;
+    }
+
+
+    /**
+     * @param string $timefield
+     */
+    public function setTimefield(string $timefield): void
+    {
+        $this->timefield = $timefield;
+    }
+
+
+    /**
+     * @param string $table
+     */
+    public function setTable(string $table): void
+    {
+        $this->table = $table;
+    }
+
+
+    /**
+     * @return string
+     */
+    public function getSignaturfield(): string
+    {
+        return $this->signaturfield;
+    }
+
+
+    /**
+     * @param string $signaturfield
+     */
+    public function setSignaturfield(string $signaturfield): void
+    {
+        $this->signaturfield = $signaturfield;
+    }
+
+
+    /**
+     * @return string
+     */
+    public function getDatafield(): string
+    {
+        return $this->datafield;
+    }
+
+
+    /**
+     * @param string $datafield
+     */
+    public function setDatafield(string $datafield): void
+    {
+        $this->datafield = $datafield;
     }
 
 

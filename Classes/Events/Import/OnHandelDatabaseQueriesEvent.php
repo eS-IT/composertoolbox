@@ -35,6 +35,27 @@ class OnHandelDatabaseQueriesEvent extends Event
 
 
     /**
+     * Name des Datenbankfelds für die Importzeit.
+     * @var string
+     */
+    protected $timefield = '';
+
+
+    /**
+     * Name des Dantenbankfelds für die Signatur.
+     * @var string
+     */
+    protected $signaturfield = '';
+
+
+    /**
+     * Name des Datenbankfelds für die Importdaten.
+     * @var string
+     */
+    protected $datafield = '';
+
+
+    /**
      * Inhalt der hoch geladenen Datei
      * @var string
      */
@@ -79,6 +100,60 @@ class OnHandelDatabaseQueriesEvent extends Event
     public function setTable(string $table): void
     {
         $this->table = $table;
+    }
+
+
+    /**
+     * @return string
+     */
+    public function getTimefield(): string
+    {
+        return $this->timefield;
+    }
+
+
+    /**
+     * @param string $timefield
+     */
+    public function setTimefield(string $timefield): void
+    {
+        $this->timefield = $timefield;
+    }
+
+
+    /**
+     * @return string
+     */
+    public function getSignaturfield(): string
+    {
+        return $this->signaturfield;
+    }
+
+
+    /**
+     * @param string $signaturfield
+     */
+    public function setSignaturfield(string $signaturfield): void
+    {
+        $this->signaturfield = $signaturfield;
+    }
+
+
+    /**
+     * @return string
+     */
+    public function getDatafield(): string
+    {
+        return $this->datafield;
+    }
+
+
+    /**
+     * @param string $datafield
+     */
+    public function setDatafield(string $datafield): void
+    {
+        $this->datafield = $datafield;
     }
 
 

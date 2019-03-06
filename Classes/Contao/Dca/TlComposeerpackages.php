@@ -63,7 +63,7 @@ class TlComposeerpackages
     {
         $formId                         = 'composerimportform';
         $datafield                      = 'importdata';
-        $hashfield                      = 'inputhash';
+        $signaturefield                 = 'importhash';
         $maxlength                      = Config::get('maxFileSize') ?: '2048000';
         $scriptName                     = Environment::get('scriptName');
         $link                           = 'app';
@@ -72,11 +72,12 @@ class TlComposeerpackages
         $this->template->formId         = $formId;
         $this->template->maxFileSize    = $maxlength;
         $this->template->dataField      = $datafield;
-        $this->template->hashField      = $hashfield;
+        $this->template->hashField      = $signaturefield;
         $this->template->langOutput     = $GLOBALS['TL_LANG']['MSC']['composerimport']['output'];
 
         if ($formId === $_POST['FORM_SUBMIT']) {
-            $event                      = $this->handleImport($_FILES, $datafield, Input::post($hashfield));
+            $signature                  = Input::post($signaturefield);
+            $event                      = $this->handleImport($_FILES, $datafield, $signaturefield, $signature);
             $this->template->errors     = $event->getErrors();
             $this->template->jsondata   = $event->getContent();
         }
@@ -89,14 +90,18 @@ class TlComposeerpackages
      * Verarbeitet das Formular.
      * @param $files
      * @param $datafield
+     * @param $signaturefield
      * @param $signature
      * @return OnHandleImportEvent
      */
-    protected function handleImport($files, $datafield, $signature): OnHandleImportEvent
+    protected function handleImport($files, $datafield, $signaturefield, $signature): OnHandleImportEvent
     {
         $event = new OnHandleImportEvent();
         $event->setFiles($files);
-        $event->setNameDatafield($datafield);
+        $event->setTable('tl_composeerpackages');
+        $event->setTimefield('importtime');
+        $event->setDatafield($datafield);
+        $event->setSignaturfield($signaturefield);
         $event->setSignature($signature);
 
         $this->dispatcher->dispatch($event::NAME, $event);

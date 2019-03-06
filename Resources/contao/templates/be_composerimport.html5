@@ -14,8 +14,8 @@
                 <input type="hidden" name="MAX_FILE_SIZE" value="<?php echo $this->maxFileSize; ?>" />
 
                 <div class="formfield">
-                    <label for="<?php echo $this->hashField; ?>"><?php echo $this->langOutput['hash']; ?></label>
-                    <input type="text" name="<?php echo $this->hashField; ?>" id="<?php echo $this->hashField; ?>" maxlength="255" required placeholder="<?php echo $this->langOutput['hashplaceholder']; ?>">
+                    <label for="<?php echo $this->hashField; ?>"><?php echo $this->langOutput['signature']; ?></label>
+                    <input type="text" name="<?php echo $this->hashField; ?>" id="<?php echo $this->hashField; ?>" maxlength="255" required placeholder="<?php echo $this->langOutput['signatureplaceholder']; ?>">
                 </div>
 
                 <div class="formfield">
