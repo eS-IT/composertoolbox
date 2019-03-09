@@ -76,24 +76,67 @@ class OnHandleComposerJsonListener
         $comopsoer      = $event->getComposerContent();
         $newContent     = $event->getMergedContent();
         $allowedFields  = $event->getAllowdFields();
+        $delId          = $event->getId();
 
-        if (\is_array($content) &&
+        if (0 === $delId &&
+            \is_array($content) &&
             \is_array($comopsoer) &&
             \is_array($allowedFields) &&
             \count($content) &&
             \count($comopsoer) &&
-            \count($allowedFields) &&
-            !\count($newContent)
+            \count($allowedFields)
         ) {
-            // Nur ausführen, wenn noch nichts gemerged wurde!
-            // Ist bereits etwas in $newontent, die Verarbeitugn auslassen!
-
             foreach ($allowedFields as $field) {
                 if (isset($content[$field])) {
                     if (isset($newContent[$field])) {
                         $newContent[$field] = \array_merge($newContent[$field], $content[$field]);
                     } else {
                         $newContent[$field] = $content[$field];
+                    }
+                }
+            }
+        }
+
+        $event->setMergedContent($newContent);
+    }
+
+
+    /**
+     * Löschte die Packete aus der composer.json, wenn ein Datensatz gelöscht wird.
+     * @param OnHandleComposerJsonEvent $event
+     */
+    public function deleteSections(OnHandleComposerJsonEvent $event): void
+    {
+        $content        = $event->getContent();
+        $comopsoer      = $event->getComposerContent();
+        $newContent     = $event->getMergedContent();
+        $allowedFields  = $event->getAllowdFields();
+        $delId          = $event->getId();
+
+        if (0 !== $delId &&
+            \is_array($content) &&
+            \is_array($comopsoer) &&
+            \is_array($allowedFields) &&
+            \count($content) &&
+            \count($comopsoer) &&
+            \count($allowedFields)
+        ) {
+            foreach ($allowedFields as $field) {
+                if (isset($content[$field]) && \is_array($content[$field])) {
+                    $packages = \array_keys($content[$field]);
+
+                    if (\is_array($packages)) {
+                        foreach ($packages as $package) {
+                            if (isset($newContent[$field][$package])) {
+                                // Packete entfernen
+                                unset($newContent[$field][$package]);
+                            }
+                        }
+                    }
+
+                    if (!\count($newContent[$field])) {
+                        // Leere Sektionen lösschen
+                        unset($newContent[$field]);
                     }
                 }
             }

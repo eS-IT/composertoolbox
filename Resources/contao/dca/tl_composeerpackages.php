@@ -48,6 +48,7 @@ $GLOBALS['TL_DCA'][$strName] = array
         'notSortable'       => true,
         'notCopyable'       => true,
         'notCreatable'      => true,
+        'ondelete_callback' => [[\Esit\Composertoolbox\Classes\Contao\Callbacks\TlComposeerpackages::class, 'deleteFromComposer']],
         'sql'               => array
         (
             'keys' => array

@@ -28,6 +28,14 @@ class OnHandleComposerJsonEvent extends Event
 
 
     /**
+     * Id des zu löschenden Datensatzes.
+     * Ist die Id gesetzt, werden die Einträge aus der composer.json entfernt und nicht eingefügt!
+     * @var int
+     */
+    protected $id = 0;
+
+
+    /**
      * Dateiname (TL_ROOT/composer.json)
      * @var string
      */
@@ -74,6 +82,24 @@ class OnHandleComposerJsonEvent extends Event
      * @var array
      */
     protected $allowdFields = ['require', 'require-dev', 'repositories'];
+
+
+    /**
+     * @return int
+     */
+    public function getId(): int
+    {
+        return $this->id;
+    }
+
+
+    /**
+     * @param int $id
+     */
+    public function setId(int $id): void
+    {
+        $this->id = $id;
+    }
 
 
     /**
