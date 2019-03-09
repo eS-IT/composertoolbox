@@ -70,13 +70,6 @@ class OnHandelDatabaseQueriesEvent extends Event
 
 
     /**
-     * Array mit den aufgetretene Fehlern
-     * @var array
-     */
-    protected $errors = [];
-
-
-    /**
      * Anzahl wie oft die hoch geladene Signatur schon in der Datenbank vorkommt.
      * Muss 0 sein, damit die Daten verarbeitet werden. Ist die Signatur bereits
      * vorhanden, wird die Verarbeitung abgebrochen.
@@ -208,23 +201,5 @@ class OnHandelDatabaseQueriesEvent extends Event
     public function setSignatureCount(int $signatureCount): void
     {
         $this->signatureCount = $signatureCount;
-    }
-
-
-    /**
-     * @return array
-     */
-    public function getErrors(): array
-    {
-        return $this->errors;
-    }
-
-
-    /**
-     * @param array $errors
-     */
-    public function setErrors(array $errors): void
-    {
-        $this->errors = $errors;
     }
 }

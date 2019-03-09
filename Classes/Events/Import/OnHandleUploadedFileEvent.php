@@ -55,13 +55,6 @@ class OnHandleUploadedFileEvent extends Event
 
 
     /**
-     * Array mit den aufgetretenen Fehlern
-     * @var array
-     */
-    protected $errors = [];
-
-
-    /**
      * Inhalt der hoch geladenen Datei
      * @var string
      */
@@ -137,34 +130,6 @@ class OnHandleUploadedFileEvent extends Event
     public function setSignature(string $signature): void
     {
         $this->signature = $signature;
-    }
-
-
-    /**
-     * @return array
-     */
-    public function getErrors(): array
-    {
-        return $this->errors;
-    }
-
-
-    /**
-     * @param array $errors
-     */
-    public function setErrors(array $errors): void
-    {
-        $this->errors = $errors;
-    }
-
-
-    /**
-     * Fügt einen Fehler hinzu.
-     * @param string $error
-     */
-    public function addError(string $error): void
-    {
-        $this->errors[] = $error;
     }
 
 

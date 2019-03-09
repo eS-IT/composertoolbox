@@ -70,13 +70,6 @@ class OnHandleImportEvent extends Event
 
 
     /**
-     * Array mit den aufgetretenen Fehlern
-     * @var array
-     */
-    protected $errors = [];
-
-
-    /**
      * Inhalt für die Ausgabe
      * @var string
      */
@@ -196,24 +189,6 @@ class OnHandleImportEvent extends Event
     public function setSignature(string $signature): void
     {
         $this->signature = $signature;
-    }
-
-
-    /**
-     * @return array
-     */
-    public function getErrors(): array
-    {
-        return $this->errors;
-    }
-
-
-    /**
-     * @param array $errors
-     */
-    public function setErrors(array $errors): void
-    {
-        $this->errors = $errors;
     }
 
 

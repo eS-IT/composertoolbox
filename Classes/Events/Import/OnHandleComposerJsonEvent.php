@@ -71,13 +71,6 @@ class OnHandleComposerJsonEvent extends Event
 
 
     /**
-     * Array mit den aufgetretenen Fehlern.
-     * @var array
-     */
-    protected $errors = [];
-
-
-    /**
      * Die erlaubten Abschnitte, die in der composer.json bearbeitet werden dürfen.
      * @var array
      */
@@ -189,34 +182,6 @@ class OnHandleComposerJsonEvent extends Event
     public function setMergedContent(array $mergedContent): void
     {
         $this->mergedContent = $mergedContent;
-    }
-
-
-    /**
-     * @return array
-     */
-    public function getErrors(): array
-    {
-        return $this->errors;
-    }
-
-
-    /**
-     * @param array $errors
-     */
-    public function setErrors(array $errors): void
-    {
-        $this->errors = $errors;
-    }
-
-
-    /**
-     * Fügt einen Fehler hinzu.
-     * @param string $error
-     */
-    public function addError(string $error): void
-    {
-        $this->errors[] = $error;
     }
 
 

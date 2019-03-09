@@ -59,9 +59,8 @@ class OnHandleImportListener
     {
         $content    = $event->getContent();
         $signature  = $event->getSignature();
-        $errors     = $event->getErrors();
 
-        if ('' !== $content && '' !== $signature && 0 === \count($errors)) {
+        if ('' !== $content && '' !== $signature) {
             $dbEvent = new OnHandelDatabaseQueriesEvent();
             $dbEvent->setTable($event->getTable());
             $dbEvent->setTimefield($event->getTimefield());
@@ -85,7 +84,6 @@ class OnHandleImportListener
      */
     public function handleComposerJson(OnHandleImportEvent $event, $name, EventDispatcherInterface $di): void
     {
-        $errors         = $event->getErrors();
         $content        = $event->getContent();
         $signatureCount = $event->getSignatureCount();
 

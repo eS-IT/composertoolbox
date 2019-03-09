@@ -17,6 +17,7 @@ use Contao\Environment;
 use Contao\Input;
 use Contao\System;
 use Esit\Composertoolbox\Classes\Events\Import\OnHandleImportEvent;
+use Esit\Composertoolbox\Classes\Exceptions\ComposerToolboxExeption;
 
 /**
  * Class TlComposeerpackages
@@ -76,10 +77,15 @@ class TlComposeerpackages
         $this->template->langOutput     = $GLOBALS['TL_LANG']['MSC']['composerimport']['output'];
 
         if ($formId === $_POST['FORM_SUBMIT']) {
-            $signature                  = Input::post($signaturefield);
-            $event                      = $this->handleImport($_FILES, $datafield, $signaturefield, $signature);
-            $this->template->errors     = $event->getErrors();
-            $this->template->jsondata   = $event->getContent();
+            $signature = Input::post($signaturefield);
+
+            try {
+                $this->template->jsondata   = $this->handleImport($_FILES, $datafield, $signaturefield, $signature);
+                $this->template->errors     = [];
+            } catch (ComposerToolboxExeption $e) {
+                $errors[]                   = $e->getMessage();
+                $this->template->errors     = $errors;
+            }
         }
 
         return $this->template->parse();
@@ -92,9 +98,9 @@ class TlComposeerpackages
      * @param $datafield
      * @param $signaturefield
      * @param $signature
-     * @return OnHandleImportEvent
+     * @return string
      */
-    protected function handleImport($files, $datafield, $signaturefield, $signature): OnHandleImportEvent
+    protected function handleImport($files, $datafield, $signaturefield, $signature): string
     {
         $event = new OnHandleImportEvent();
         $event->setFiles($files);
@@ -104,13 +110,8 @@ class TlComposeerpackages
         $event->setSignaturfield($signaturefield);
         $event->setSignature($signature);
 
-        try {
-            $this->dispatcher->dispatch($event::NAME, $event);
-        } catch (\Exception $e) {
-            $errors[] = $e->getMessage();
-            $event->setErrors($errors);
-        }
+        $this->dispatcher->dispatch($event::NAME, $event);
 
-        return $event;
+        return $event->getContent();
     }
 }

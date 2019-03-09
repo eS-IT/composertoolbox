@@ -30,7 +30,7 @@ class OnHandleUploadedFileListener
      */
     public function checkUpload(OnHandleUploadedFileEvent $event): void
     {
-        $file           = $event->getFile();
+        $file = $event->getFile();
 
         if (!\is_array($file) || !isset($file['tmp_name']) || !\is_file($file['tmp_name'])) {
             throw new NoFileUploadetException('nofile');
