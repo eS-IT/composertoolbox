@@ -104,7 +104,12 @@ class TlComposeerpackages
         $event->setSignaturfield($signaturefield);
         $event->setSignature($signature);
 
-        $this->dispatcher->dispatch($event::NAME, $event);
+        try {
+            $this->dispatcher->dispatch($event::NAME, $event);
+        } catch (\Exception $e) {
+            $errors[] = $e->getMessage();
+            $event->setErrors($errors);
+        }
 
         return $event;
     }

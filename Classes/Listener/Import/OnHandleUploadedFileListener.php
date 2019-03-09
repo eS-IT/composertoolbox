@@ -12,6 +12,9 @@
 namespace Esit\Composertoolbox\Classes\Listener\Import;
 
 use Esit\Composertoolbox\Classes\Events\Import\OnHandleUploadedFileEvent;
+use Esit\Composertoolbox\Classes\Exceptions\Upload\NoFileUploadetException;
+use Esit\Composertoolbox\Classes\Exceptions\Upload\WrongFileTypeException;
+use Esit\Composertoolbox\Classes\Exceptions\Upload\WrongSignatureException;
 
 /**
  * Class OnHandleUploadedFileListener
@@ -27,14 +30,11 @@ class OnHandleUploadedFileListener
      */
     public function checkUpload(OnHandleUploadedFileEvent $event): void
     {
-        $errors         = $event->getErrors();
         $file           = $event->getFile();
 
         if (!\is_array($file) || !isset($file['tmp_name']) || !\is_file($file['tmp_name'])) {
-            $errors[] = 'nofile';
+            throw new NoFileUploadetException('nofile');
         }
-
-        $event->setErrors($errors);
     }
 
 
@@ -44,18 +44,15 @@ class OnHandleUploadedFileListener
      */
     public function checkFiletype(OnHandleUploadedFileEvent $event): void
     {
-        $errors         = $event->getErrors();
         $file           = $event->getFile();
         $allowedTyps    = $event->getAllowedFiletyps();
         $ext            = \pathinfo($file['name'], \PATHINFO_EXTENSION);
 
         if (\is_array($file)) {
             if (!isset($file['name']) || !\in_array($ext, $allowedTyps, true)) {
-                $errors[] = 'nojsonfile';
+                throw new WrongFileTypeException('nojsonfile');
             }
         }
-
-        $event->setErrors($errors);
     }
 
 
@@ -65,7 +62,6 @@ class OnHandleUploadedFileListener
      */
     public function checkSignature(OnHandleUploadedFileEvent $event): void
     {
-        $errors     = $event->getErrors();
         $file       = $event->getFile();
         $signature  = $event->getSignature();
         $algo       = $event->getHashAlgorithm();
@@ -75,12 +71,9 @@ class OnHandleUploadedFileListener
             $fileHash = \hash_file($algo, $fileName);
 
             if ($fileHash !== $signature) {
-                $errors[] = 'signatureerror';
-                $event->stopPropagation();
+                throw new WrongSignatureException('signatureerror');
             }
         }
-
-        $event->setErrors($errors);
     }
 
 

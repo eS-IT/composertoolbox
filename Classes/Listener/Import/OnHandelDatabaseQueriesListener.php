@@ -13,6 +13,8 @@ namespace Esit\Composertoolbox\Classes\Listener\Import;
 
 use Doctrine\DBAL\Connection;
 use Esit\Composertoolbox\Classes\Events\Import\OnHandelDatabaseQueriesEvent;
+use Esit\Composertoolbox\Classes\Exceptions\Database\NoValidSectionToSaveException;
+use Esit\Composertoolbox\Classes\Exceptions\Database\SignatureNotUniqueInDatabaseException;
 
 /**
  * Class OnHandelDatabaseQueriesListener
@@ -63,8 +65,6 @@ class OnHandelDatabaseQueriesListener
      */
     public function saveDataIntoDb(OnHandelDatabaseQueriesEvent $event): void
     {
-        $errors = $event->getErrors();
-
         if (0 === $event->getSignatureCount()) {
             $table      = $event->getTable();
             $signature  = $event->getSignature();
@@ -80,13 +80,11 @@ class OnHandelDatabaseQueriesListener
                     $query->setParameters([\time(), $signature, $content]);
                     $query->execute();
                 } else {
-                    $errors[] = 'novalidsections';
+                    throw new NoValidSectionToSaveException('novalidsections');
                 }
             }
         } else {
-            $errors[] = 'signaturenotunique';
+            throw new SignatureNotUniqueInDatabaseException('signaturenotunique');
         }
-
-        $event->setErrors($errors);
     }
 }

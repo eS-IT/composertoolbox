@@ -12,6 +12,7 @@
 namespace Esit\Composertoolbox\Classes\Listener\Import;
 
 use Esit\Composertoolbox\Classes\Events\Import\OnHandleComposerJsonEvent;
+use Esit\Composertoolbox\Classes\Exceptions\Composer\FileSaveException;
 
 /**
  * Class OnHandleComposerJsonListener
@@ -161,7 +162,7 @@ class OnHandleComposerJsonListener
             $rtn        = \file_put_contents($file, $newContent);
 
             if (false === $rtn) {
-                $event->addError('savecomposererror');
+                throw new FileSaveException('savecomposererror');
             }
         }
     }
