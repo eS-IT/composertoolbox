@@ -49,7 +49,7 @@ class EsitTestCase extends ContaoTestCase
     /**
      * setup the environment
      */
-    protected function setUp()
+    protected function setUp(): void
     {
     }
 
@@ -57,7 +57,7 @@ class EsitTestCase extends ContaoTestCase
     /**
      * tear down the environment
      */
-    protected function tearDown()
+    protected function tearDown(): void
     {
     }
 

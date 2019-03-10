@@ -9,13 +9,11 @@
  * @copyright   e@sy Solutions IT 2019
  * @license     EULA
  */
-namespace Esit\Composertoolbox\Classes\Exceptions\Composer;
-
-use Esit\Composertoolbox\Classes\Exceptions\ComposerToolboxExeption;
+namespace Esit\Composertoolbox\Classes\Exceptions;
 
 /**
  * Class FileSaveException
- * @package Esit\Composertoolbox\Classes\Exceptions\Composer
+ * @package Esit\Composertoolbox\Classes\Exceptions
  */
 final class FileSaveException extends \RuntimeException implements ComposerToolboxExeption
 {

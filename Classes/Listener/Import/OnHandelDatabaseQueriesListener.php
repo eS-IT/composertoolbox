@@ -13,8 +13,8 @@ namespace Esit\Composertoolbox\Classes\Listener\Import;
 
 use Doctrine\DBAL\Connection;
 use Esit\Composertoolbox\Classes\Events\Import\OnHandelDatabaseQueriesEvent;
-use Esit\Composertoolbox\Classes\Exceptions\Database\NoValidSectionToSaveException;
-use Esit\Composertoolbox\Classes\Exceptions\Database\SignatureNotUniqueInDatabaseException;
+use Esit\Composertoolbox\Classes\Exceptions\NoValidSectionToSaveException;
+use Esit\Composertoolbox\Classes\Exceptions\SignatureNotUniqueInDatabaseException;
 
 /**
  * Class OnHandelDatabaseQueriesListener

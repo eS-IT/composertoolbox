@@ -12,9 +12,12 @@
 namespace Esit\Composertoolbox\Classes\Listener\Import;
 
 use Esit\Composertoolbox\Classes\Events\Import\OnHandleUploadedFileEvent;
-use Esit\Composertoolbox\Classes\Exceptions\Upload\NoFileUploadetException;
-use Esit\Composertoolbox\Classes\Exceptions\Upload\WrongFileTypeException;
-use Esit\Composertoolbox\Classes\Exceptions\Upload\WrongSignatureException;
+use Esit\Composertoolbox\Classes\Exceptions\NoAllowedFileTypes;
+use Esit\Composertoolbox\Classes\Exceptions\NoFileUploadetException;
+use Esit\Composertoolbox\Classes\Exceptions\NoSignatureGiven;
+use Esit\Composertoolbox\Classes\Exceptions\WrongFileTypeException;
+use Esit\Composertoolbox\Classes\Exceptions\WrongSignatureException;
+use Esit\Composertoolbox\Classes\Serives\Filesystem;
 
 /**
  * Class OnHandleUploadedFileListener
@@ -25,6 +28,22 @@ class OnHandleUploadedFileListener
 
 
     /**
+     * @var Filesystem
+     */
+    protected $filesystem;
+
+
+    /**
+     * OnHandleUploadedFileListener constructor.
+     * @param Filesystem $filesystem
+     */
+    public function __construct(Filesystem $filesystem)
+    {
+        $this->filesystem = $filesystem;
+    }
+
+
+    /**
      * Überprüft, ob eine Datei hochgeladen wurde.
      * @param OnHandleUploadedFileEvent $event
      */
@@ -32,7 +51,7 @@ class OnHandleUploadedFileListener
     {
         $file = $event->getFile();
 
-        if (!\is_array($file) || !isset($file['tmp_name']) || !\is_file($file['tmp_name'])) {
+        if (!isset($file['tmp_name']) || empty($file['tmp_name']) || !$this->filesystem->exists($file['tmp_name'])) {
             throw new NoFileUploadetException('nofile');
         }
     }
@@ -46,12 +65,19 @@ class OnHandleUploadedFileListener
     {
         $file           = $event->getFile();
         $allowedTyps    = $event->getAllowedFiletyps();
-        $ext            = \pathinfo($file['name'], \PATHINFO_EXTENSION);
 
-        if (\is_array($file)) {
-            if (!isset($file['name']) || !\in_array($ext, $allowedTyps, true)) {
-                throw new WrongFileTypeException('nojsonfile');
-            }
+        if (!isset($file['name']) || empty($file['name'])) {
+            throw new NoFileUploadetException('nofile');
+        }
+
+        if (0 === \count($allowedTyps)) {
+            throw new NoAllowedFileTypes('noallowedfiletypes');
+        }
+
+        $ext = \pathinfo($file['name'], \PATHINFO_EXTENSION);
+
+        if (!isset($file['name']) || !\in_array($ext, $allowedTyps, true)) {
+            throw new WrongFileTypeException('nojsonfile');
         }
     }
 
@@ -62,17 +88,22 @@ class OnHandleUploadedFileListener
      */
     public function checkSignature(OnHandleUploadedFileEvent $event): void
     {
+        $algo       = $event->getHashAlgorithm();
         $file       = $event->getFile();
         $signature  = $event->getSignature();
-        $algo       = $event->getHashAlgorithm();
 
-        if (\is_array($file) && isset($file['tmp_name'])) {
-            $fileName = $file['tmp_name'];
-            $fileHash = \hash_file($algo, $fileName);
+        if (!isset($file['tmp_name']) || empty($file['tmp_name'])) {
+            throw new NoFileUploadetException('nofile');
+        }
 
-            if ($fileHash !== $signature) {
-                throw new WrongSignatureException('signatureerror');
-            }
+        if ('' === $signature) {
+            throw new NoSignatureGiven('nosignaturegiven');
+        }
+
+        $fileHash = $this->filesystem->hash($algo, $file['tmp_name']);
+
+        if ($fileHash !== $signature) {
+            throw new WrongSignatureException('signatureerror');
         }
     }
 
@@ -85,8 +116,12 @@ class OnHandleUploadedFileListener
     {
         $file = $event->getFile();
 
-        if (\is_array($file) && isset($file['tmp_name'])) {
-            $event->setContent(\file_get_contents($file['tmp_name']));
+        if (!isset($file['tmp_name']) || empty($file['tmp_name'])) {
+            throw new NoFileUploadetException('nofile');
+        }
+
+        if (isset($file['tmp_name'])) {
+            $event->setContent($this->filesystem->getContents($file['tmp_name']));
         }
     }
 }

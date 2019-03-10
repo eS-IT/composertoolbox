@@ -12,7 +12,7 @@
 namespace Esit\Composertoolbox\Classes\Listener\Import;
 
 use Esit\Composertoolbox\Classes\Events\Import\OnHandleComposerJsonEvent;
-use Esit\Composertoolbox\Classes\Exceptions\Composer\FileSaveException;
+use Esit\Composertoolbox\Classes\Exceptions\FileSaveException;
 
 /**
  * Class OnHandleComposerJsonListener

@@ -9,13 +9,11 @@
  * @copyright   e@sy Solutions IT 2019
  * @license     EULA
  */
-namespace Esit\Composertoolbox\Classes\Exceptions\Upload;
-
-use Esit\Composertoolbox\Classes\Exceptions\ComposerToolboxExeption;
+namespace Esit\Composertoolbox\Classes\Exceptions;
 
 /**
  * Class WrongSignatureException
- * @package Esit\Composertoolbox\Classes\Exceptions\Upload
+ * @package Esit\Composertoolbox\Classes\Exceptions
  */
 final class WrongSignatureException extends \InvalidArgumentException implements ComposerToolboxExeption
 {

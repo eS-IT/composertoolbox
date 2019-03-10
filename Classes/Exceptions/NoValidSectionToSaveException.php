@@ -9,13 +9,11 @@
  * @copyright   e@sy Solutions IT 2019
  * @license     EULA
  */
-namespace Esit\Composertoolbox\Classes\Exceptions\Database;
-
-use Esit\Composertoolbox\Classes\Exceptions\ComposerToolboxExeption;
+namespace Esit\Composertoolbox\Classes\Exceptions;
 
 /**
  * Class NoValidSectionToSaveException
- * @package Esit\Composertoolbox\Classes\Exceptions\Database
+ * @package Esit\Composertoolbox\Classes\Exceptions
  */
 final class NoValidSectionToSaveException extends \InvalidArgumentException implements ComposerToolboxExeption
 {

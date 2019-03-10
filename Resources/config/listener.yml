@@ -33,25 +33,25 @@ services:
     # OnHandleUploadedFileListener
     esit_composertoolbox.listener.composertoolbox_on_handle_uploaded_file.check_upload:
         class: Esit\Composertoolbox\Classes\Listener\Import\OnHandleUploadedFileListener
-        arguments: []
+        arguments: ['@esit_composertoolbox.services.filesystem']
         tags:
             - { name: kernel.event_listener, event: composertoolbox.on.handle.uploaded.file.event, method: checkUpload, priority: 4096 }
 
     esit_composertoolbox.listener.composertoolbox_on_handle_uploaded_file.check_filetype:
         class: Esit\Composertoolbox\Classes\Listener\Import\OnHandleUploadedFileListener
-        arguments: []
+        arguments: ['@esit_composertoolbox.services.filesystem']
         tags:
             - { name: kernel.event_listener, event: composertoolbox.on.handle.uploaded.file.event, method: checkFiletype, priority: 3072 }
 
     esit_composertoolbox.listener.composertoolbox_on_handle_uploaded_file.check_signature:
         class: Esit\Composertoolbox\Classes\Listener\Import\OnHandleUploadedFileListener
-        arguments: []
+        arguments: ['@esit_composertoolbox.services.filesystem']
         tags:
             - { name: kernel.event_listener, event: composertoolbox.on.handle.uploaded.file.event, method: checkSignature, priority: 2048 }
 
     esit_composertoolbox.listener.composertoolbox_on_handle_uploaded_file.load_file_content:
         class: Esit\Composertoolbox\Classes\Listener\Import\OnHandleUploadedFileListener
-        arguments: []
+        arguments: ['@esit_composertoolbox.services.filesystem']
         tags:
             - { name: kernel.event_listener, event: composertoolbox.on.handle.uploaded.file.event, method: loadFileContent, priority: 1024 }
 

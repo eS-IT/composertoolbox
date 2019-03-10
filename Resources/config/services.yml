@@ -1,5 +1,5 @@
 # Services
 services:
-#    esit_composertoolbox.services.sessiontoken:
-#        class: Esit\Composertoolbox\Classes\Services\SessionToken
-#        arguments: ["@session"]
+    esit_composertoolbox.services.filesystem:
+        class: Esit\Composertoolbox\Classes\Serives\Filesystem
+        arguments: []

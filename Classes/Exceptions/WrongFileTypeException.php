@@ -9,13 +9,11 @@
  * @copyright   e@sy Solutions IT 2019
  * @license     EULA
  */
-namespace Esit\Composertoolbox\Classes\Exceptions\Upload;
-
-use Esit\Composertoolbox\Classes\Exceptions\ComposerToolboxExeption;
+namespace Esit\Composertoolbox\Classes\Exceptions;
 
 /**
  * Class WrongFileTypeException
- * @package Esit\Composertoolbox\Classes\Exceptions\Upload
+ * @package Esit\Composertoolbox\Classes\Exceptions
  */
 final class WrongFileTypeException extends \InvalidArgumentException implements ComposerToolboxExeption
 {
