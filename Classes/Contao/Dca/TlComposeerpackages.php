@@ -83,7 +83,7 @@ class TlComposeerpackages
                 $this->template->jsondata   = $this->handleImport($_FILES, $datafield, $signaturefield, $signature);
                 $this->template->errors     = [];
             } catch (ComposerToolboxExeption $e) {
-                $errors[]                   = $e->getMessage();
+                $errors[]                   = $e;
                 $this->template->errors     = $errors;
             }
         }

@@ -77,7 +77,7 @@ class OnHandleUploadedFileListener
         $ext = \pathinfo($file['name'], \PATHINFO_EXTENSION);
 
         if (!isset($file['name']) || !\in_array($ext, $allowedTyps, true)) {
-            throw new WrongFileTypeException('nojsonfile');
+            throw new WrongFileTypeException('filetypenptallowed');
         }
     }
 

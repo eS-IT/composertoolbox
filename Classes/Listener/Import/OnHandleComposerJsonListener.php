@@ -13,6 +13,7 @@ namespace Esit\Composertoolbox\Classes\Listener\Import;
 
 use Esit\Composertoolbox\Classes\Events\Import\OnHandleComposerJsonEvent;
 use Esit\Composertoolbox\Classes\Exceptions\FileSaveException;
+use Esit\Composertoolbox\Classes\Serives\Filesystem;
 
 /**
  * Class OnHandleComposerJsonListener
@@ -20,6 +21,13 @@ use Esit\Composertoolbox\Classes\Exceptions\FileSaveException;
  */
 class OnHandleComposerJsonListener
 {
+    protected $filesystem;
+
+
+    public function __construct(Filesystem $fs)
+    {
+        $this->filesystem = $fs;
+    }
 
 
     /**
@@ -56,7 +64,7 @@ class OnHandleComposerJsonListener
         $file = $event->getFilename();
 
         if (\is_file($file)) {
-            $content = \file_get_contents($file);
+            $content = $this->filesystem->getContents($file);
             $content = \json_decode($content, true);
 
             if (\is_array($content)) {
@@ -156,7 +164,7 @@ class OnHandleComposerJsonListener
         $file       = $event->getFilename();
         $newContent = $event->getMergedContent();
         $newContent = \json_encode($newContent, \JSON_PRETTY_PRINT | \JSON_UNESCAPED_SLASHES);
-        $rtn        = \file_put_contents($file, $newContent);
+        $rtn        = $this->filesystem->putContents($file, $newContent);
 
         if (false === $rtn) {
             throw new FileSaveException('savecomposererror');

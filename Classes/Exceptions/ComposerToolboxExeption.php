@@ -11,6 +11,10 @@
  */
 namespace Esit\Composertoolbox\Classes\Exceptions;
 
+/**
+ * Interface ComposerToolboxExeption
+ * @package Esit\Composertoolbox\Classes\Exceptions
+ */
 interface ComposerToolboxExeption
 {
 }

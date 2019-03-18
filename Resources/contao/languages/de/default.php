@@ -42,11 +42,15 @@ $GLOBALS['TL_LANG']['MSC']['composerimport']['output']['uploadplaceholder']     
 $GLOBALS['TL_LANG']['MSC']['composerimport']['output']['inputheadline']         = 'Folgende Daten wurden importiert';
 $GLOBALS['TL_LANG']['MSC']['composerimport']['output']['errorheadline']         = 'Es ist ein Fehler aufgetreten!';
 $GLOBALS['TL_LANG']['MSC']['composerimport']['output']['nofile']                = 'Es wurde keine Datei hochgeladen! Bitte laden Sie eine JSON-Datei hoch!';
-$GLOBALS['TL_LANG']['MSC']['composerimport']['output']['nojsonfile']            = 'Ungültiges Format der hoch geladenen Datei! Bitte laden Sie eine JSON-Datei hoch!';
+$GLOBALS['TL_LANG']['MSC']['composerimport']['output']['filetypenptallowed']    = 'Ungültiges Format der hoch geladenen Datei! Bitte laden Sie eine JSON-Datei hoch!';
 $GLOBALS['TL_LANG']['MSC']['composerimport']['output']['signatureerror']        = 'Die Sigatur stimmt nicht mit der hoch geladenen Datei über ein! Bitte laden Sie eine JSON-Datei hoch und gebe Sie die dazugehörige Sigatur an!';
 $GLOBALS['TL_LANG']['MSC']['composerimport']['output']['nodataerror']           = 'Es wurde keine gültigen Daten gefunden!';
 $GLOBALS['TL_LANG']['MSC']['composerimport']['output']['signaturenotunique']    = 'Signatur schon vorhanden! Das mehrfache Importieren eine Konfiguration wird nicht unterstützt. Bitte löschen Sie zu erst die vorhandene Konfiguration mit dieser Signatur.';
 $GLOBALS['TL_LANG']['MSC']['composerimport']['output']['novalidsections']       = 'Es wurde keine erlaubten Abschnitte in der zu importierenden JSON-Datei gefunden!';
+$GLOBALS['TL_LANG']['MSC']['composerimport']['output']['savecomposererror']     = 'Beim Speichern der Datei composer.json ist ein Fehler aufgetreten! Die Datei konnte nicht gespeichert werden!';
+$GLOBALS['TL_LANG']['MSC']['composerimport']['output']['noallowedfiletypes']    = 'Es wurden keine gültigen Dateitypen gefunden!';
+$GLOBALS['TL_LANG']['MSC']['composerimport']['output']['nosignaturegiven']      = 'Es wurden keine Signatur angegeben!';
+
 
 /**
  * Content Elemente
