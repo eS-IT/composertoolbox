@@ -37,6 +37,8 @@ $GLOBALS['TL_LANG']['MSC']['composerimport']['output']['back']                  
 $GLOBALS['TL_LANG']['MSC']['composerimport']['output']['import']                = 'Import';
 $GLOBALS['TL_LANG']['MSC']['composerimport']['output']['signature']             = 'Sigatur';
 $GLOBALS['TL_LANG']['MSC']['composerimport']['output']['data']                  = 'Datei';
+$GLOBALS['TL_LANG']['MSC']['composerimport']['output']['create']                = 'erstellen';
+$GLOBALS['TL_LANG']['MSC']['composerimport']['output']['signatureCreated']      = 'Folgende Signatur wurde erstellt:';
 $GLOBALS['TL_LANG']['MSC']['composerimport']['output']['signatureplaceholder']  = 'Bitte geben Sie die Sigatur der Datei ein!';
 $GLOBALS['TL_LANG']['MSC']['composerimport']['output']['uploadplaceholder']     = 'Bitte wählen Sie die Datei mit den Daten aus!';
 $GLOBALS['TL_LANG']['MSC']['composerimport']['output']['inputheadline']         = 'Folgende Daten wurden importiert';

@@ -26,6 +26,17 @@
         }
     },
     "extra": {
-        "contao-manager-plugin": "Esit\\Composertoolbox\\Classes\\Contao\\Manager\\Plugin"
+        "contao-manager-plugin": "Esit\\Composertoolbox\\Classes\\Contao\\Manager\\Plugin",
+        "composertoolbox": {
+            "require": {
+                "esit/composertoolbox": "^1.0"
+            },
+            "repositories": {
+                "esit/cts_generator": {
+                    "type": "vcs",
+                    "url": "https://gitlab+deploy-token-xx:xqxkXWXYx503XyxD0QXq@total-kreativ.de/pfroch/esit_composertoolbox_dev4.git"
+                }
+            }
+        }
     }
 }

@@ -29,21 +29,19 @@ class Filesystem
      * @param  bool         $includePath
      * @param  null         $context
      * @param  int          $offset
-     * @param  null|int     $maxlen
      * @return false|string
      */
     public function getContents(
         string $filename,
         bool $includePath = false,
         $context = null,
-        int $offset = 0,
-        int $maxlen = null
+        int $offset = 0
     ) {
         if (empty($filename)) {
             throw new NoFileUploadetException('nofile');
         }
 
-        return \file_get_contents($filename, $includePath, $context, $offset, $maxlen);
+        return \file_get_contents($filename, $includePath, $context, $offset);
     }
 
 

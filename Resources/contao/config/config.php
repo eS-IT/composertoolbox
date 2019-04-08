@@ -58,9 +58,9 @@
  */
 $GLOBALS['BE_MOD']['esit']['composertoolbox'] = [
     'tables'    => ['tl_composeerpackages'],
-    'insert'    => [\Esit\Composertoolbox\Classes\Contao\Dca\TlComposeerpackages::class, 'compile']
+    'insert'    => [\Esit\Composertoolbox\Classes\Contao\Dca\ComposerImporter::class, 'compile'],
+    'signature' => [\Esit\Composertoolbox\Classes\Contao\Dca\ComposerSignature::class, 'compile']
 ];
-
 
 /**
  * FRONT END MODULES
@@ -286,3 +286,10 @@ $GLOBALS['BE_MOD']['esit']['composertoolbox'] = [
  * When rebuilding the search index URLs, Contao needs to know about these
  * keywords so it can handle them properly.
  */
+
+
+/**
+ * ESIT_COMPOSERTOOLBOX
+ */
+$GLOBALS['ESIT']['COMPOSERTOOLBOX']['composerfilename'] = TL_ROOT . '/composer.json';
+$GLOBALS['ESIT']['COMPOSERTOOLBOX']['algorithm']       = 'sha512';

@@ -21,22 +21,21 @@ use Esit\Composertoolbox\Classes\Serives\Filesystem;
  */
 class OnHandleComposerJsonListener
 {
-    protected $filesystem;
-
-
-    public function __construct(Filesystem $fs)
-    {
-        $this->filesystem = $fs;
-    }
 
 
     /**
-     * Erstellt den Pfad zur composer.json.
-     * @param OnHandleComposerJsonEvent $event
+     * @var Filesystem
      */
-    public function setFilename(OnHandleComposerJsonEvent $event): void
+    protected $filesystem;
+
+
+    /**
+     * OnHandleComposerJsonListener constructor.
+     * @param Filesystem $fs
+     */
+    public function __construct(Filesystem $fs)
     {
-        $event->setFilename(TL_ROOT . '/composer.json');
+        $this->filesystem = $fs;
     }
 
 
@@ -82,25 +81,27 @@ class OnHandleComposerJsonListener
     public function mergeArrays(OnHandleComposerJsonEvent $event): void
     {
         $content        = $event->getContent();
-        $comopsoer      = $event->getComposerContent();
+        $composoer      = $event->getComposerContent();
         $newContent     = $event->getMergedContent();
         $allowedFields  = $event->getAllowdFields();
         $delId          = $event->getId();
 
         if (0 === $delId &&
             \is_array($content) &&
-            \is_array($comopsoer) &&
+            \is_array($composoer) &&
             \is_array($allowedFields) &&
             \count($content) &&
-            \count($comopsoer) &&
+            \count($composoer) &&
             \count($allowedFields)
         ) {
             foreach ($allowedFields as $field) {
-                if (isset($content[$field])) {
+                if (isset($content['extra']['composertoolbox'][$field])) {
+                    $fieldContent = $content['extra']['composertoolbox'][$field];
+
                     if (isset($newContent[$field])) {
-                        $newContent[$field] = \array_merge($newContent[$field], $content[$field]);
+                        $newContent[$field] = \array_merge($newContent[$field], $fieldContent);
                     } else {
-                        $newContent[$field] = $content[$field];
+                        $newContent[$field] = $fieldContent;
                     }
                 }
             }

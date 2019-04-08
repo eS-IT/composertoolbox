@@ -70,6 +70,21 @@ class OnHandleImportEvent extends Event
 
 
     /**
+     * Name der Ausgabedatei
+     * (Im Normalfall composer.json)
+     * @var string
+     */
+    protected $composerFilename = '';
+
+
+    /**
+     * Der zuverwendende Hashingalgorithmus für den Vergleich der Signatur
+     * @var string
+     */
+    protected $hashAlgorithm = 'sha512';
+
+
+    /**
      * Inhalt für die Ausgabe
      * @var string
      */
@@ -189,6 +204,42 @@ class OnHandleImportEvent extends Event
     public function setSignature(string $signature): void
     {
         $this->signature = $signature;
+    }
+
+
+    /**
+     * @return string
+     */
+    public function getHashAlgorithm(): string
+    {
+        return $this->hashAlgorithm;
+    }
+
+
+    /**
+     * @param string $hashAlgorithm
+     */
+    public function setHashAlgorithm(string $hashAlgorithm): void
+    {
+        $this->hashAlgorithm = $hashAlgorithm;
+    }
+
+
+    /**
+     * @return string
+     */
+    public function getComposerFilename(): string
+    {
+        return $this->composerFilename;
+    }
+
+
+    /**
+     * @param string $composerFilename
+     */
+    public function setComposerFilename(string $composerFilename): void
+    {
+        $this->composerFilename = $composerFilename;
     }
 
 

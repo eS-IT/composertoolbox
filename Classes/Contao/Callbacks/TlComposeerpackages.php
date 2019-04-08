@@ -1,7 +1,7 @@
 <?php declare(strict_types = 1);
 /**
  * @package     composertoolbox
- * @filesource  TlComposeerpackages.php
+ * @filesource  ComposerImporterp
  * @version     1.0.0
  * @since       06.03.19 - 16:49
  * @author      Patrick Froch <info@easySolutionsIT.de>
@@ -15,7 +15,7 @@ use Contao\System;
 use Esit\Composertoolbox\Classes\Events\Import\OnHandleComposerJsonEvent;
 
 /**
- * Class TlComposeerpackages
+ * Class ComposerImporter
  * @package Esit\Composertoolbox\Classes\Contao\Callbacks
  */
 class TlComposeerpackages
@@ -33,8 +33,11 @@ class TlComposeerpackages
         if (isset($row['importdata'])) {
             $data = \json_decode($row['importdata'], true);
 
-            if (\is_array($data) && isset($data['require']) && \is_array($data['require'])) {
-                $packages = \array_keys($data['require']);
+            if (\is_array($data) &&
+                isset($data['extra']['composertoolbox']['require']) &&
+                \is_array($data['extra']['composertoolbox']['require'])
+            ) {
+                $packages = \array_keys($data['extra']['composertoolbox']['require']);
 
                 if (\is_array($packages)) {
                     $label .= ' - ';
@@ -57,6 +60,14 @@ class TlComposeerpackages
         $event  = new OnHandleComposerJsonEvent();
         $event->setId((int) $dc->activeRecord->id);
         $event->setContentString($dc->activeRecord->importdata);
+
+        if (isset($GLOBALS['ESIT']['COMPOSERTOOLBOX']['composerfilename']) &&
+            '' !== $GLOBALS['ESIT']['COMPOSERTOOLBOX']['composerfilename']
+        ) {
+            $event->setFilename($GLOBALS['ESIT']['COMPOSERTOOLBOX']['composerfilename']);
+        } else {
+            $event->setFilename(TL_ROOT . '/composer.json');
+        }
 
         $di->dispatch($event::NAME, $event);
     }

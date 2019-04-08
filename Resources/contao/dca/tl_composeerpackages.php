@@ -178,3 +178,15 @@ $GLOBALS['TL_DCA'][$strName] = array
         )
     )
 );
+
+$container      = \Contao\System::getContainer();
+$showSignature  = $container->getParameter('composertoolbox_signature');
+
+if ($showSignature) {
+    $GLOBALS['TL_DCA'][$strName]['list']['global_operations']['signature'] = [
+        'label'      => &$GLOBALS['TL_LANG'][$strName]['signature'],
+        'href'       => 'key=signature',
+        'icon'       => 'editor.svg',
+        'attributes' => 'onclick="Backend.getScrollOffset();" accesskey="e"'
+    ];
+}

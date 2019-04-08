@@ -36,11 +36,13 @@ class OnHandleImportListener
         $files      = $event->getFiles();
         $datafield  = $event->getDatafield();
         $signature  = $event->getSignature();
+        $algprithm  = $event->getHashAlgorithm();
 
         if ('' !== $signature && isset($files[$datafield])) {
             $uploadEvent = new OnHandleUploadedFileEvent();
             $uploadEvent->setFile($files[$datafield]);
             $uploadEvent->setSignature($signature);
+            $uploadEvent->setHashAlgorithm($algprithm);
 
             $di->dispatch($uploadEvent::NAME, $uploadEvent);
 
@@ -90,6 +92,7 @@ class OnHandleImportListener
         if ('' !== $content && 0 === $signatureCount) {
             $composerEvent = new OnHandleComposerJsonEvent();
             $composerEvent->setContentString($content);
+            $composerEvent->setFilename($event->getComposerFilename());
 
             $di->dispatch($composerEvent::NAME, $composerEvent);
         }

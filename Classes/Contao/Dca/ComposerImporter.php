@@ -1,7 +1,7 @@
 <?php declare(strict_types = 1);
 /**
  * @package     composertoolbox
- * @filesource  TlComposeerpackages.php
+ * @filesource  ComposerImporter.php
  * @version     1.0.0
  * @since       03.03.19 - 17:39
  * @author      Patrick Froch <info@easySolutionsIT.de>
@@ -20,10 +20,10 @@ use Esit\Composertoolbox\Classes\Events\Import\OnHandleImportEvent;
 use Esit\Composertoolbox\Classes\Exceptions\ComposerToolboxExeption;
 
 /**
- * Class TlComposeerpackages
+ * Class ComposerImporter
  * @package Composertoolbox\Classes\Contao\Dca
  */
-class TlComposeerpackages
+class ComposerImporter
 {
 
 
@@ -47,7 +47,7 @@ class TlComposeerpackages
 
 
     /**
-     * TlComposeerpackages constructor.
+     * ComposerImporter constructor.
      */
     public function __construct()
     {
@@ -109,6 +109,22 @@ class TlComposeerpackages
         $event->setDatafield($datafield);
         $event->setSignaturfield($signaturefield);
         $event->setSignature($signature);
+
+        if (isset($GLOBALS['ESIT']['COMPOSERTOOLBOX']['composerfilename']) &&
+            '' !== $GLOBALS['ESIT']['COMPOSERTOOLBOX']['composerfilename']
+        ) {
+            $event->setComposerFilename($GLOBALS['ESIT']['COMPOSERTOOLBOX']['composerfilename']);
+        } else {
+            $event->setComposerFilename(TL_ROOT . '/composer.json');
+        }
+
+        if (isset($GLOBALS['ESIT']['COMPOSERTOOLBOX']['algorithm']) &&
+            '' !== $GLOBALS['ESIT']['COMPOSERTOOLBOX']['algorithm']
+        ) {
+            $event->setComposerFilename($GLOBALS['ESIT']['COMPOSERTOOLBOX']['algorithm']);
+        } else {
+            $event->setHashAlgorithm('sha512');
+        }
 
         $this->dispatcher->dispatch($event::NAME, $event);
 

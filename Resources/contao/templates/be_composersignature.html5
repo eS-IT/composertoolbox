@@ -1,0 +1,75 @@
+<div class="block" id="composerimport">
+
+    <div id="tl_buttons">
+        <a href="<?php echo $this->backlink; ?>" class="header_back" title="" accesskey="b" onclick="Backend.getScrollOffset()"><?php echo $this->langOutput['back']; ?></a>
+    </div>
+
+    <div class="inside">
+        <h2><?php echo $this->langOutput['signature']; ?> <?php echo $this->langOutput['create']; ?></h2>
+
+        <form action="<?php echo $this->action ?>" method="post" enctype="multipart/form-data">
+            <div class="formbody">
+                <input type="hidden" name="FORM_SUBMIT" value="<?php echo $this->formId; ?>">
+                <input type="hidden" name="REQUEST_TOKEN" value="<?php echo REQUEST_TOKEN; ?>">
+                <input type="hidden" name="MAX_FILE_SIZE" value="<?php echo $this->maxFileSize; ?>" />
+
+
+                <div class="formfield">
+                    <label for="<?php echo $this->upluadField; ?>"><?php echo $this->langOutput['data']; ?></label>
+                    <input type="file" name="<?php echo $this->upluadField; ?>" id="<?php echo $this->upluadField; ?>"  maxlength="<?php echo $this->maxFileSize; ?>" required>
+                </div>
+
+                <input type="submit" class="tl_submit" value="Absenden">
+            </div>
+        </form>
+    </div>
+
+    <?php if (!empty($this->generatedSignature)): ?>
+        <div class="inside">
+            <h2><?php echo $this->langOutput['signatureCreated']; ?></h2>
+            <pre class="debug"><?php echo $this->generatedSignature; ?></pre>
+        </div>
+    <?php endif; ?>
+</div>
+
+<style>
+    #composerimport .inside {
+        border-top: 1px solid #e6e6e8;
+        padding: 15px;
+    }
+
+    #composerimport .inside h2 {
+        margin: 20px 0;
+    }
+
+    #composerimport .inside .formfield {
+        margin-bottom: 20px;
+    }
+
+    #composerimport .inside .formfield label {
+        display: block;
+        margin-bottom: 5px;
+    }
+
+    #composerimport .inside .debug {
+        background: #f6f6f6;
+        border: 1px solid #e6e6e8;
+        padding: 5px;
+    }
+
+    #composerimport .inside .error {
+        background-color: #f8d7da;
+        border: 1px solid #f5c6cb;
+        color: #721c24;
+        padding: 5px;
+    }
+
+    #composerimport .inside .error li {
+        list-style: disc;
+        margin: 5px 0 0 15px;
+    }
+
+    #<?php echo $this->hashField; ?> {
+        width: 99%;
+    }
+</style>

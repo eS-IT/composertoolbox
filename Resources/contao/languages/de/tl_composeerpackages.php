@@ -60,6 +60,7 @@ $GLOBALS['TL_LANG'][$strName]['importdata_legend']  = 'Daten';
  * Operations
  */
 $GLOBALS['TL_LANG'][$strName]['insert']             = ['Daten importieren', 'Daten importieren'];
+$GLOBALS['TL_LANG'][$strName]['signature']          = ['Signatur erstellen', 'Signatur erstellen'];
 
 
 /**
