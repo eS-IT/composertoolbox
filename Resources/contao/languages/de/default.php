@@ -44,6 +44,7 @@ $GLOBALS['TL_LANG']['MSC']['composerimport']['output']['uploadplaceholder']     
 $GLOBALS['TL_LANG']['MSC']['composerimport']['output']['inputheadline']         = 'Folgende Daten wurden importiert';
 $GLOBALS['TL_LANG']['MSC']['composerimport']['output']['errorheadline']         = 'Es ist ein Fehler aufgetreten!';
 $GLOBALS['TL_LANG']['MSC']['composerimport']['output']['nofile']                = 'Es wurde keine Datei hochgeladen! Bitte laden Sie eine JSON-Datei hoch!';
+$GLOBALS['TL_LANG']['MSC']['composerimport']['output']['filenotfound']          = 'Die angegebene Datei konnte nicht gefunden werden!';
 $GLOBALS['TL_LANG']['MSC']['composerimport']['output']['filetypenptallowed']    = 'Ungültiges Format der hoch geladenen Datei! Bitte laden Sie eine JSON-Datei hoch!';
 $GLOBALS['TL_LANG']['MSC']['composerimport']['output']['signatureerror']        = 'Die Sigatur stimmt nicht mit der hoch geladenen Datei über ein! Bitte laden Sie eine JSON-Datei hoch und gebe Sie die dazugehörige Sigatur an!';
 $GLOBALS['TL_LANG']['MSC']['composerimport']['output']['nodataerror']           = 'Es wurde keine gültigen Daten gefunden!';

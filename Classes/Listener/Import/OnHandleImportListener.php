@@ -11,8 +11,8 @@
  */
 namespace Esit\Composertoolbox\Classes\Listener\Import;
 
-use Esit\Composertoolbox\Classes\Events\Import\OnHandelDatabaseQueriesEvent;
 use Esit\Composertoolbox\Classes\Events\Import\OnHandleComposerJsonEvent;
+use Esit\Composertoolbox\Classes\Events\Import\OnHandleDatabaseQueriesEvent;
 use Esit\Composertoolbox\Classes\Events\Import\OnHandleImportEvent;
 use Esit\Composertoolbox\Classes\Events\Import\OnHandleUploadedFileEvent;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
@@ -63,7 +63,7 @@ class OnHandleImportListener
         $signature  = $event->getSignature();
 
         if ('' !== $content && '' !== $signature) {
-            $dbEvent = new OnHandelDatabaseQueriesEvent();
+            $dbEvent = new OnHandleDatabaseQueriesEvent();
             $dbEvent->setTable($event->getTable());
             $dbEvent->setTimefield($event->getTimefield());
             $dbEvent->setSignaturfield($event->getSignaturfield());

@@ -41,6 +41,11 @@ class Filesystem
             throw new NoFileUploadetException('nofile');
         }
 
+
+        if (!$this->exists($filename)) {
+            throw new NoFileUploadetException('filenotfound');
+        }
+
         return \file_get_contents($filename, $includePath, $context, $offset);
     }
 
@@ -88,12 +93,12 @@ class Filesystem
      */
     public function hash(string $algo, string $filename, bool $raw = false): string
     {
-        if (empty($filename)) {
-            throw new NoFileUploadetException('nofile');
-        }
-
         if ('' === $algo) {
             throw new NoHashingAlgorithm('nohashingalgorithm');
+        }
+
+        if (empty($filename) || !\is_file($filename) || !\is_readable($filename)) {
+            throw new NoFileUploadetException('nofile');
         }
 
         return \hash_file($algo, $filename, $raw);

@@ -12,7 +12,7 @@
 namespace Esit\Composertoolbox\Classes\Listener\Import;
 
 use Doctrine\DBAL\Connection;
-use Esit\Composertoolbox\Classes\Events\Import\OnHandelDatabaseQueriesEvent;
+use Esit\Composertoolbox\Classes\Events\Import\OnHandleDatabaseQueriesEvent;
 use Esit\Composertoolbox\Classes\Exceptions\NoValidSectionToSaveException;
 use Esit\Composertoolbox\Classes\Exceptions\SignatureNotUniqueInDatabaseException;
 
@@ -42,9 +42,9 @@ class OnHandelDatabaseQueriesListener
 
     /**
      * Prüft ob die Signatur bereits in der Datenbank vorhanden ist.
-     * @param OnHandelDatabaseQueriesEvent $event
+     * @param OnHandleDatabaseQueriesEvent $event
      */
-    public function checkSignatureInDb(OnHandelDatabaseQueriesEvent $event): void
+    public function checkSignatureInDb(OnHandleDatabaseQueriesEvent $event): void
     {
         $table      = $event->getTable();
         $signature  = $event->getSignature();
@@ -61,9 +61,9 @@ class OnHandelDatabaseQueriesListener
 
     /**
      * Fügt die Daten in die Datenbank ein.
-     * @param OnHandelDatabaseQueriesEvent $event
+     * @param OnHandleDatabaseQueriesEvent $event
      */
-    public function saveDataIntoDb(OnHandelDatabaseQueriesEvent $event): void
+    public function saveDataIntoDb(OnHandleDatabaseQueriesEvent $event): void
     {
         if (0 === $event->getSignatureCount()) {
             $table      = $event->getTable();

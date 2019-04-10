@@ -1,7 +1,7 @@
 <?php declare(strict_types = 1);
 /**
  * @package     composertoolbox
- * @filesource  OnHandelDatabaseQueriesEvent.php
+ * @filesource  OnHandleDatabaseQueriesEvent.php
  * @version     1.0.0
  * @since       04.03.19 - 18:49
  * @author      Patrick Froch <info@easySolutionsIT.de>
@@ -14,10 +14,10 @@ namespace Esit\Composertoolbox\Classes\Events\Import;
 use Symfony\Component\EventDispatcher\Event;
 
 /**
- * Class OnHandelDatabaseQueriesEvent
+ * Class OnHandleDatabaseQueriesEvent
  * @package Esit\Composertoolbox\Classes\Events\Import
  */
-class OnHandelDatabaseQueriesEvent extends Event
+class OnHandleDatabaseQueriesEvent extends Event
 {
 
 
