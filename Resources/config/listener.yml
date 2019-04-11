@@ -62,13 +62,13 @@ services:
 
     # OnHandelDatabaseQueriesListener
     esit_composertoolbox.listener.composertoolbox_on_handle_database_queries.check_signature_in_db:
-        class: Esit\Composertoolbox\Classes\Listener\Import\OnHandelDatabaseQueriesListener
+        class: Esit\Composertoolbox\Classes\Listener\Import\OnHandleDatabaseQueriesListener
         arguments: ["@database_connection"]
         tags:
             - { name: kernel.event_listener, event: composertoolbox.on.handle.database.queries.event, method: checkSignatureInDb, priority: 2048 }
 
     esit_composertoolbox.listener.composertoolbox_on_handle_database_queries.save_data_into_db:
-        class: Esit\Composertoolbox\Classes\Listener\Import\OnHandelDatabaseQueriesListener
+        class: Esit\Composertoolbox\Classes\Listener\Import\OnHandleDatabaseQueriesListener
         arguments: ["@database_connection"]
         tags:
             - { name: kernel.event_listener, event: composertoolbox.on.handle.database.queries.event, method: saveDataIntoDb, priority: 1024 }
@@ -79,31 +79,49 @@ services:
     ##
 
     # OnHandleComposerJsonListener
-    esit_composertoolbox.listener..composertoolbox_on_handle_composer_json.parse_uploaded_content:
+    esit_composertoolbox.listener.composertoolbox_on_handle_composer_json.parse_uploaded_content:
         class: Esit\Composertoolbox\Classes\Listener\Import\OnHandleComposerJsonListener
         arguments: ["@esit_composertoolbox.services.filesystem"]
         tags:
-            - { name: kernel.event_listener, event: composertoolbox.on.handle.composer.json.event, method: parseUploadedContent, priority: 5120 }
+            - { name: kernel.event_listener, event: composertoolbox.on.handle.composer.json.event, method: parseUploadedContent, priority: 8192 }
 
-    esit_composertoolbox.listener..composertoolbox_on_handle_composer_json.load_composer_json:
+    esit_composertoolbox.listener.composertoolbox_on_handle_composer_json.load_composer_json:
         class: Esit\Composertoolbox\Classes\Listener\Import\OnHandleComposerJsonListener
         arguments: ["@esit_composertoolbox.services.filesystem"]
         tags:
-            - { name: kernel.event_listener, event: composertoolbox.on.handle.composer.json.event, method: loadComposerJson, priority: 4096 }
+            - { name: kernel.event_listener, event: composertoolbox.on.handle.composer.json.event, method: loadComposerJson, priority: 7168 }
 
-    esit_composertoolbox.listener..composertoolbox_on_handle_composer_json.merge_arrays:
+    esit_composertoolbox.listener.composertoolbox_on_handle_composer_json.check_new_content:
+        class: Esit\Composertoolbox\Classes\Listener\Import\OnHandleComposerJsonListener
+        arguments: ["@esit_composertoolbox.services.filesystem"]
+        tags:
+            - { name: kernel.event_listener, event: composertoolbox.on.handle.composer.json.event, method: checkNewContent, priority: 6144 }
+
+    esit_composertoolbox.listener.composertoolbox_on_handle_composer_json.check_composer_content:
+        class: Esit\Composertoolbox\Classes\Listener\Import\OnHandleComposerJsonListener
+        arguments: ["@esit_composertoolbox.services.filesystem"]
+        tags:
+            - { name: kernel.event_listener, event: composertoolbox.on.handle.composer.json.event, method: checkComposerContent, priority: 5120 }
+
+    esit_composertoolbox.listener.composertoolbox_on_handle_composer_json.check_allowed_fields:
+        class: Esit\Composertoolbox\Classes\Listener\Import\OnHandleComposerJsonListener
+        arguments: ["@esit_composertoolbox.services.filesystem"]
+        tags:
+            - { name: kernel.event_listener, event: composertoolbox.on.handle.composer.json.event, method: checkAllowedFields, priority: 4096 }
+
+    esit_composertoolbox.listener.composertoolbox_on_handle_composer_json.merge_arrays:
         class: Esit\Composertoolbox\Classes\Listener\Import\OnHandleComposerJsonListener
         arguments: ["@esit_composertoolbox.services.filesystem"]
         tags:
             - { name: kernel.event_listener, event: composertoolbox.on.handle.composer.json.event, method: mergeArrays, priority: 3072 }
 
-    esit_composertoolbox.listener..composertoolbox_on_handle_composer_json.delete_sections:
+    esit_composertoolbox.listener.composertoolbox_on_handle_composer_json.delete_sections:
         class: Esit\Composertoolbox\Classes\Listener\Import\OnHandleComposerJsonListener
         arguments: ["@esit_composertoolbox.services.filesystem"]
         tags:
             - { name: kernel.event_listener, event: composertoolbox.on.handle.composer.json.event, method: deleteSections, priority: 2048 }
 
-    esit_composertoolbox.listener..composertoolbox_on_handle_composer_json.save_composer_json:
+    esit_composertoolbox.listener.composertoolbox_on_handle_composer_json.save_composer_json:
         class: Esit\Composertoolbox\Classes\Listener\Import\OnHandleComposerJsonListener
         arguments: ["@esit_composertoolbox.services.filesystem"]
         tags:

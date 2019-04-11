@@ -13,6 +13,9 @@ namespace Esit\Composertoolbox\Classes\Listener\Import;
 
 use Esit\Composertoolbox\Classes\Events\Import\OnHandleComposerJsonEvent;
 use Esit\Composertoolbox\Classes\Exceptions\FileSaveException;
+use Esit\Composertoolbox\Classes\Exceptions\NoComposerDataGiven;
+use Esit\Composertoolbox\Classes\Exceptions\NoFileDataGiven;
+use Esit\Composertoolbox\Classes\Exceptions\NoValidSectionToSaveException;
 use Esit\Composertoolbox\Classes\Serives\Filesystem;
 
 /**
@@ -62,7 +65,7 @@ class OnHandleComposerJsonListener
     {
         $file = $event->getFilename();
 
-        if (\is_file($file)) {
+        if ($this->filesystem->exists($file)) {
             $content = $this->filesystem->getContents($file);
             $content = \json_decode($content, true);
 
@@ -75,25 +78,59 @@ class OnHandleComposerJsonListener
 
 
     /**
+     * Prüft, ob Daten aus der hoch geladenen Datei vorliegen.
+     * @param OnHandleComposerJsonEvent $event
+     */
+    public function checkNewContent(OnHandleComposerJsonEvent $event): void
+    {
+        $content = $event->getContent();
+
+        if (!\count($content)) {
+            throw new NoFileDataGiven('nodataerror');
+        }
+    }
+
+
+    /**
+     * Prüft, ob Daten aus der lokalen comopser.json vorliegen.
+     * @param OnHandleComposerJsonEvent $event
+     */
+    public function checkComposerContent(OnHandleComposerJsonEvent $event): void
+    {
+        $composoer = $event->getComposerContent();
+
+        if (!\count($composoer)) {
+            throw new NoComposerDataGiven('nocomposerdata');
+        }
+    }
+
+
+    /**
+     * Prüft, ob es erlaubte Abschnitte gibt.
+     * @param OnHandleComposerJsonEvent $event
+     */
+    public function checkAllowedFields(OnHandleComposerJsonEvent $event): void
+    {
+        $allowedFields = $event->getAllowdFields();
+
+        if (!\count($allowedFields)) {
+            throw new NoValidSectionToSaveException('nodataerror');
+        }
+    }
+
+
+    /**
      * Fügt die Daten der hoch geladenen Datei in die comopser.json ein.
      * @param OnHandleComposerJsonEvent $event
      */
     public function mergeArrays(OnHandleComposerJsonEvent $event): void
     {
         $content        = $event->getContent();
-        $composoer      = $event->getComposerContent();
         $newContent     = $event->getMergedContent();
         $allowedFields  = $event->getAllowdFields();
         $delId          = $event->getId();
 
-        if (0 === $delId &&
-            \is_array($content) &&
-            \is_array($composoer) &&
-            \is_array($allowedFields) &&
-            \count($content) &&
-            \count($composoer) &&
-            \count($allowedFields)
-        ) {
+        if (0 === $delId) {
             foreach ($allowedFields as $field) {
                 if (isset($content['extra']['composertoolbox'][$field])) {
                     $fieldContent = $content['extra']['composertoolbox'][$field];
@@ -118,29 +155,19 @@ class OnHandleComposerJsonListener
     public function deleteSections(OnHandleComposerJsonEvent $event): void
     {
         $content        = $event->getContent();
-        $comopsoer      = $event->getComposerContent();
         $newContent     = $event->getMergedContent();
         $allowedFields  = $event->getAllowdFields();
         $delId          = $event->getId();
 
-        if (0 !== $delId &&
-            \is_array($content) &&
-            \is_array($comopsoer) &&
-            \is_array($allowedFields) &&
-            \count($content) &&
-            \count($comopsoer) &&
-            \count($allowedFields)
-        ) {
+        if (0 !== $delId) {
             foreach ($allowedFields as $field) {
                 if (isset($content[$field]) && \is_array($content[$field])) {
                     $packages = \array_keys($content[$field]);
 
-                    if (\is_array($packages)) {
-                        foreach ($packages as $package) {
-                            if (isset($newContent[$field][$package])) {
-                                // Packete entfernen
-                                unset($newContent[$field][$package]);
-                            }
+                    foreach ($packages as $package) {
+                        if (isset($newContent[$field][$package])) {
+                            // Packete entfernen
+                            unset($newContent[$field][$package]);
                         }
                     }
 

@@ -53,6 +53,7 @@ $GLOBALS['TL_LANG']['MSC']['composerimport']['output']['novalidsections']       
 $GLOBALS['TL_LANG']['MSC']['composerimport']['output']['savecomposererror']     = 'Beim Speichern der Datei composer.json ist ein Fehler aufgetreten! Die Datei konnte nicht gespeichert werden!';
 $GLOBALS['TL_LANG']['MSC']['composerimport']['output']['noallowedfiletypes']    = 'Es wurden keine gültigen Dateitypen gefunden!';
 $GLOBALS['TL_LANG']['MSC']['composerimport']['output']['nosignaturegiven']      = 'Es wurden keine Signatur angegeben!';
+$GLOBALS['TL_LANG']['MSC']['composerimport']['output']['nocomposerdata']        = 'Keine Daten aus der lokalen composer.json gefunden!';
 
 
 /**

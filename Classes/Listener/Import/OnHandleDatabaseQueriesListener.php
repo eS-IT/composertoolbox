@@ -1,7 +1,7 @@
 <?php declare(strict_types = 1);
 /**
  * @package     composertoolbox
- * @filesource  OnHandelDatabaseQueriesListener.php
+ * @filesource  OnHandleDatabaseQueriesListener.php
  * @version     1.0.0
  * @since       04.03.19 - 18:55
  * @author      Patrick Froch <info@easySolutionsIT.de>
@@ -17,10 +17,10 @@ use Esit\Composertoolbox\Classes\Exceptions\NoValidSectionToSaveException;
 use Esit\Composertoolbox\Classes\Exceptions\SignatureNotUniqueInDatabaseException;
 
 /**
- * Class OnHandelDatabaseQueriesListener
+ * Class OnHandleDatabaseQueriesListener
  * @package Esit\Composertoolbox\Classes\Listener\Import
  */
-class OnHandelDatabaseQueriesListener
+class OnHandleDatabaseQueriesListener
 {
 
 
@@ -74,14 +74,12 @@ class OnHandelDatabaseQueriesListener
             $dataField  = $event->getDatafield();
 
             if ('' !== $signature && '' !== $content) {
-                if (\substr_count($content, 'require') || \substr_count($content, 'repository')) {
-                    $query = $this->connection->createQueryBuilder();
-                    $query->insert($table)->values([$timeField => '?', $sigField => '?', $dataField => '?']);
-                    $query->setParameters([\time(), $signature, $content]);
-                    $query->execute();
-                } else {
-                    throw new NoValidSectionToSaveException('novalidsections');
-                }
+                $query = $this->connection->createQueryBuilder();
+                $query->insert($table)->values([$timeField => '?', $sigField => '?', $dataField => '?']);
+                $query->setParameters([\time(), $signature, $content]);
+                $query->execute();
+            } else {
+                throw new NoValidSectionToSaveException('novalidsections');
             }
         } else {
             throw new SignatureNotUniqueInDatabaseException('signaturenotunique');
