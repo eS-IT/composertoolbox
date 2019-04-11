@@ -1,6 +1,6 @@
 {
     "name": "esit/composertoolbox",
-    "description": "Es handelt sich um eine Erweiterung für das Open Source CMS Contao",
+    "description": "Bei der ComposerToolbox handelt es sich um eine Erweiterung für das Open Source CMs Contao, mit der es möglich ist geschützte Repsoitories in die composer.json einzutragen, ohne diese direkt bearbeiten zu müssen.",
     "license": "proprietary",
     "type": "contao-bundle",
     "authors": [
@@ -16,8 +16,6 @@
     },
     "require": {
         "php": ">=7.1",
-        "ext-pdo": "*",
-        "ext-json": "*",
         "contao/core-bundle": "~4.4"
     },
     "autoload": {
@@ -27,16 +25,5 @@
     },
     "extra": {
         "contao-manager-plugin": "Esit\\Composertoolbox\\Classes\\Contao\\Manager\\Plugin",
-        "composertoolbox": {
-            "require": {
-                "esit/composertoolbox": "^1.0"
-            },
-            "repositories": {
-                "esit/cts_generator": {
-                    "type": "vcs",
-                    "url": "https://gitlab+deploy-token-xx:xqxkXWXYx503XyxD0QXq@total-kreativ.de/pfroch/esit_composertoolbox_dev4.git"
-                }
-            }
-        }
     }
 }
