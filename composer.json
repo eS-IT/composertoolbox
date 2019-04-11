@@ -24,6 +24,6 @@
         }
     },
     "extra": {
-        "contao-manager-plugin": "Esit\\Composertoolbox\\Classes\\Contao\\Manager\\Plugin",
+        "contao-manager-plugin": "Esit\\Composertoolbox\\Classes\\Contao\\Manager\\Plugin"
     }
 }

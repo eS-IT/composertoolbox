@@ -85,6 +85,20 @@ toolFolder="${configFolder}/tools"
 classesFolder='./Classes'
 
 
+## validate compser.json
+myecho "Prüfe comopser.json"
+composer diagnose &>/dev/null
+tmperr=$?
+
+if [[ ${tmperr} -ne 0 ]]
+    then
+        error=${tmperr}
+        myerror "Es ist ein Fehler ausgetreten [${tmperr}]"
+    else
+       myshortecho "Prüfung des Schemas in der Datei composer.json erfolgreich"
+    fi
+
+
 ## phpcf
 if [[ -f ${toolFolder}/phpcf ]]
 then
