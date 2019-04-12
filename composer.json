@@ -1,7 +1,7 @@
 {
     "name": "esit/composertoolbox",
     "description": "Bei der ComposerToolbox handelt es sich um eine Erweiterung für das Open Source CMs Contao, mit der es möglich ist geschützte Repsoitories in die composer.json einzutragen, ohne diese direkt bearbeiten zu müssen.",
-    "license": "proprietary",
+    "license": "GPL-3.0-or-later",
     "type": "contao-bundle",
     "authors": [
         {

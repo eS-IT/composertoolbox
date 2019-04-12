@@ -71,4 +71,5 @@ Patrick Froch
 
 ## Lizenz
 
-Distributed under the LGPLv3 license.
+Distributed under the [LGPLv3](https://spdx.org/licenses/GPL-3.0-or-later.html#licenseText) license. 
+See `LICENSE` for more information.
