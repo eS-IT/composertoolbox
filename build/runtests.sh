@@ -86,17 +86,29 @@ classesFolder='./Classes'
 
 
 ## validate compser.json
-myecho "Prüfe comopser.json"
-composer diagnose &>/dev/null
-tmperr=$?
+if [[ -f ${toolFolder}/composer.phar ]]
+then
+    myecho "Prüfe comopser.json (verwende ${toolFolder}/composer.phar)"
+echo
+    if [[ "${VERBOSE}" == "TRUE" ]]
+    then
+        ${toolFolder}/composer.phar diagnose
+        tmperr=$?
+    else
+        ${toolFolder}/composer.phar diagnose &>/dev/null
+        tmperr=$?
+    fi
 
-if [[ ${tmperr} -ne 0 ]]
+    if [[ ${tmperr} -ne 0 ]]
     then
         error=${tmperr}
         myerror "Es ist ein Fehler ausgetreten [${tmperr}]"
     else
        myshortecho "Prüfung des Schemas in der Datei composer.json erfolgreich"
     fi
+else
+    myinfo "Prüfen des Schemas der composer.json ausgelassen. composer.phar nicht vorhanden!"
+fi
 
 
 ## phpcf
