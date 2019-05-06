@@ -121,7 +121,7 @@ class ComposerImporter
         if (isset($GLOBALS['ESIT']['COMPOSERTOOLBOX']['algorithm']) &&
             '' !== $GLOBALS['ESIT']['COMPOSERTOOLBOX']['algorithm']
         ) {
-            $event->setComposerFilename($GLOBALS['ESIT']['COMPOSERTOOLBOX']['algorithm']);
+            $event->setHashAlgorithm($GLOBALS['ESIT']['COMPOSERTOOLBOX']['algorithm']);
         } else {
             $event->setHashAlgorithm('sha512');
         }
