@@ -89,7 +89,7 @@ classesFolder='./Classes'
 if [[ -f ${toolFolder}/composer.phar ]]
 then
     myecho "Prüfe comopser.json (verwende ${toolFolder}/composer.phar)"
-echo
+
     if [[ "${VERBOSE}" == "TRUE" ]]
     then
         ${toolFolder}/composer.phar diagnose
@@ -99,7 +99,7 @@ echo
         tmperr=$?
     fi
 
-    if [[ ${tmperr} -ne 0 ]]
+    if [[ ${tmperr} -gt 1 ]]
     then
         error=${tmperr}
         myerror "Es ist ein Fehler ausgetreten [${tmperr}]"
@@ -286,11 +286,11 @@ then
         myerror "Es ist ein Fehler ausgetreten [${tmperr}]"
     fi
 else
-    if [[ -f ./vendor/bin/phpunit ]]
+    if [[ -f ../../../vendor/bin/phpunit ]]
     then
-        # PHPUnit lokal mit composer installiert
-        myecho "Führe UnitTests mit lokalem PHPUnit durch"
-        ./vendor/bin/phpunit --configuration ${configFolder}/phpunit/phpunit.xml.dist
+        # PHPUnit gobal mit composer installiert
+        myecho "Führe UnitTests mit globalem PHPUnit durch"
+        ../../../vendor/bin/phpunit --configuration ${configFolder}/phpunit/phpunit.xml.dist
         tmperr=$?
 
         if [[ ${tmperr} -ne 0 ]]
@@ -299,21 +299,7 @@ else
             myerror "Es ist ein Fehler ausgetreten [${tmperr}]"
         fi
     else
-        if [[ -f ../../../vendor/bin/phpunit ]]
-        then
-            # PHPUnit gobal mit composer installiert
-            myecho "Führe UnitTests mit globalem PHPUnit durch"
-            ../../../vendor/bin/phpunit --configuration ${configFolder}/phpunit/phpunit.xml.dist
-            tmperr=$?
-
-            if [[ ${tmperr} -ne 0 ]]
-            then
-                error=${tmperr}
-                myerror "Es ist ein Fehler ausgetreten [${tmperr}]"
-            fi
-        else
-            myinfo "Ausführen der UnitTests ausgelassen. PHPUnit nicht vorhanden!"
-        fi
+        myinfo "Ausführen der UnitTests ausgelassen. PHPUnit nicht vorhanden!"
     fi
 fi
 

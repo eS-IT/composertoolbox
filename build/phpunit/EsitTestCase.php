@@ -9,8 +9,13 @@
  * @version     2.0.0
  * @since       06.03.14 - 16:47
  */
+namespace Esit\Composertoolbox;
 
 use Contao\TestCase\ContaoTestCase;
+use Doctrine\DBAL\Connection;
+use Doctrine\DBAL\Driver\Statement;
+use Doctrine\DBAL\Query\QueryBuilder;
+use PHPUnit\Framework\MockObject\MockObject;
 
 /**
  * Class EsitTestCase
@@ -38,6 +43,7 @@ class EsitTestCase extends ContaoTestCase
      * @param null   $name
      * @param array  $data
      * @param string $dataName
+     * @throws \Exception
      */
     public function __construct($name = null, array $data = [], $dataName = '')
     {
@@ -66,19 +72,22 @@ class EsitTestCase extends ContaoTestCase
      * Initialisiert Contao
      * @param string $tlMode
      * @param string $tlScript
+     * @throws \Exception
      */
     protected function initializeContao($tlMode = 'TEST', $tlScript = 'EsitTestCase'): void
     {
-        $framework = $this->mockContaoFramework();
-        $framework->method('initialize');
+        #$framework = $this->mockContaoFramework();
+        #$framework->method('initialize');
 
         if (!defined('TL_MODE')) {
             define('TL_MODE', $tlMode);
             define('TL_SCRIPT', $tlScript);
-            $initializePath = DOC_ROOT . "/system/initialize.php";
+            $initializePath = CONTAO_ROOT . "/system/initialize.php";
 
             if (is_file($initializePath)) {
                 require($initializePath);
+            } else {
+                throw new \Exception(CONTAO_ROOT . "/system/initialize.php not found!");
             }
         }
     }
@@ -160,5 +169,155 @@ class EsitTestCase extends ContaoTestCase
         echo "\n";
         var_dump($varValue);
         echo "\n";
+    }
+
+
+    /**
+     * Erzeugt einen Mock eines Doctrine Query Builders.
+     *
+     * $query  = $this->getQueryBuilderMock();
+     *
+     * $query->expects($this->once())
+     *       ->method('select')
+     *       ->with('*')
+     *       ->willReturn($query);
+     *
+     * OR ==> $this->addMethodeMock($query, 'select', '*');
+     *
+     * $query->expects($this->once())
+     *       ->method('from')
+     *       ->with($table)
+     *       ->willReturn($query);
+     *
+     * OR ==> $this->addMethodeMock($query, 'from', '$table');
+     *
+     * $query->expects($this->once())
+     *       ->method('where')
+     *       ->with("pid = $group")
+     *       ->willReturn($query);
+     *
+     * OR ==> $this->addMethodeMock($query, 'where', "pid = $group");
+     *
+     * $connect = $this->getConnectionMock($query);
+     * @param array $return
+     * @return MockObject
+     */
+    protected function getQueryBuilderMock(array $return = []): MockObject
+    {
+        $result = $this->getMockForAbstractClass(Statement::class);
+
+        $result->method('fetch')
+               ->with(\PDO::FETCH_ASSOC)
+               ->willReturn($return);
+
+        $result->method('fetchAll')
+               ->with(\PDO::FETCH_ASSOC)
+               ->willReturn($return);
+
+        $query = $this->getMockBuilder(QueryBuilder::class)
+                      ->disableOriginalConstructor()
+                      ->setMethods(get_class_methods(QueryBuilder::class))
+                      ->getMock();
+
+        $query->method('execute')
+              ->willReturn($result);
+
+        return $query;
+    }
+
+
+    /**
+     * Konfiguriert den Mock einer Methode.
+     *
+     * $query  = $this->getQueryBuilderMock();
+     *
+     * $query->expects($this->once())
+     *       ->method('select')
+     *       ->with('*')
+     *       ->willReturn($query);
+     *
+     * OR ==> $this->addMethodeMock($query, 'select', '*');
+     *
+     * $query->expects($this->once())
+     *       ->method('from')
+     *       ->with($table)
+     *       ->willReturn($query);
+     *
+     * OR ==> $this->addMethodeMock($query, 'from', '$table');
+     *
+     * $query->expects($this->once())
+     *       ->method('where')
+     *       ->with("pid = $group")
+     *       ->willReturn($query);
+     *
+     * OR ==> $this->addMethodeMock($query, 'where', "pid = $group");
+     *
+     * $connect = $this->getConnectionMock($query);
+     *
+     * @param MockObject  $query
+     * @param string      $method
+     * @param string|null $with
+     * @param null        $return
+     */
+    public function addMethodeMock(MockObject $query, string $method, string $with = null, $return = null): void
+    {
+        $return = $return ?: $query;
+
+        if (null !== $with) {
+            $query->expects($this->once())
+                  ->method($method)
+                  ->with($with)
+                  ->willReturn($return);
+        } else {
+            $query->expects($this->once())
+                  ->method($method)
+                  ->willReturn($return);
+        }
+    }
+
+
+    /**
+     * Erzeugt ein Mock einer Doctine Dantenbankverbindung.
+     * Erhält den Mock eines QueryBuilders.
+     *
+     * $query  = $this->getQueryBuilderMock();
+     *
+     * $query->expects($this->once())
+     *       ->method('select')
+     *       ->with('*')
+     *       ->willReturn($query);
+     *
+     * OR ==> $this->addMethodeMock($query, 'select', '*');
+     *
+     * $query->expects($this->once())
+     *       ->method('from')
+     *       ->with($table)
+     *       ->willReturn($query);
+     *
+     * OR ==> $this->addMethodeMock($query, 'from', '$table');
+     *
+     * $query->expects($this->once())
+     *       ->method('where')
+     *       ->with("pid = $group")
+     *       ->willReturn($query);
+     *
+     * OR ==> $this->addMethodeMock($query, 'where', "pid = $group");
+     *
+     * $connect = $this->getConnectionMock($query);
+     *
+     * @param $query
+     * @return MockObject
+     */
+    protected function getConnectionMock($query = null): MockObject
+    {
+        $connect = $this->getMockBuilder(Connection::class)
+                        ->disableOriginalConstructor()
+                        ->setMethods(['createQueryBuilder'])
+                        ->getMock();
+
+        $connect->method('createQueryBuilder')
+                ->willReturn($query);
+
+        return $connect;
     }
 }

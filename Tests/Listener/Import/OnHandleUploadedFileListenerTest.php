@@ -14,12 +14,13 @@ namespace Esit\Composertoolbox\Tests\Listener\Import;
 use Esit\Composertoolbox\Classes\Events\Import\OnHandleUploadedFileEvent;
 use Esit\Composertoolbox\Classes\Listener\Import\OnHandleUploadedFileListener;
 use Esit\Composertoolbox\Classes\Serives\Filesystem;
+use Esit\Composertoolbox\EsitTestCase;
 
 /**
  * Class OnHandleUploadedFileListenerTest
  * @package Esit\Composertoolbox\Tests\Listener\Import
  */
-class OnHandleUploadedFileListenerTest extends \EsitTestCase
+class OnHandleUploadedFileListenerTest extends EsitTestCase
 {
 
 

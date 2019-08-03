@@ -18,12 +18,13 @@ use Esit\Composertoolbox\Classes\Exceptions\NoFileDataGiven;
 use Esit\Composertoolbox\Classes\Exceptions\NoValidSectionToSaveException;
 use Esit\Composertoolbox\Classes\Listener\Import\OnHandleComposerJsonListener;
 use Esit\Composertoolbox\Classes\Serives\Filesystem;
+use Esit\Composertoolbox\EsitTestCase;
 
 /**
  * Class OnHandleComposerJsonListenerTest
  * @package Esit\Composertoolbox\Tests\Listener\Import\data
  */
-class OnHandleComposerJsonListenerTest extends \EsitTestCase
+class OnHandleComposerJsonListenerTest extends EsitTestCase
 {
 
 

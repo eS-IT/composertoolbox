@@ -13,13 +13,14 @@ namespace Esit\Composertoolbox\Tests\Listener\Import;
 
 use Esit\Composertoolbox\Classes\Events\Import\OnHandleImportEvent;
 use Esit\Composertoolbox\Classes\Listener\Import\OnHandleImportListener;
+use Esit\Composertoolbox\EsitTestCase;
 use Symfony\Component\EventDispatcher\EventDispatcher;
 
 /**
  * Class OnHandleImportListenerTest
  * @package Esit\Composertoolbox\Tests\Listener\Import
  */
-class OnHandleImportListenerTest extends \EsitTestCase
+class OnHandleImportListenerTest extends EsitTestCase
 {
 
 

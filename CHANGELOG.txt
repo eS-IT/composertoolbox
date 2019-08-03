@@ -1,0 +1,35 @@
+1.0.6
+Close #37 - Lokale Daten der composer.json werden nicht gefunden
+
+1.0.5
+Close #36 - Vor der Verwendung prüfen, ob Parameter gesetzt sind
+
+1.0.4
+Close #35 - LICENSE hinzugefügt Close #34 - Lizenz in der composer.json anpassen
+
+1.0.3
+Close #33 - Composer im Toolverzeichnis ablegen
+
+1.0.2
+Close #32 - composer.json enthält kein valides JSON
+
+1.0.1
+Close #31 - Readme hinzugefügt Close #30 - composer.json bereinigen
+
+1.0.0
+Close #29 - Tests für Esit\Composertoolbox\Classes\Listener\Import\OnHandelDatabaseQueriesListener schreiben Close #28 - Test für Esit\Composertoolbox\Classes\Listener\Import\OnHandleComposerJsonListener schreiben
+Close #27 - Tetsts für Esit\Composertoolbox\Classes\Listener\Import\OnHandleImportListener schreiben
+Close #26 - Test für  Esit\Composertoolbox\Classes\Events\Import\OnHandleComposerJsonEvent hinzugefügt Close #25 - Test für Esit\Composertoolbox\Classes\Events\Import\OnHandleDatabaseQueriesEvent hinzugefügt Close #24 - Test für Esit\Composertoolbox\Classes\Events\Import\OnHandleImportEvent hinzugefügt Close #23 - Test für Esit\Composertoolbox\Classes\Events\Import\OnHandleUploadedFileEvent hinzugefügt Close #22 - Test für Esit\Composertoolbox\Classes\Serives\Filesystem hinzugefügt
+Close #20 - Der Algorithmus sollte einstellbar sein. Close #19 - Die Signatur sollte über die Toolbox erstellt werden können Close #18 - Struktur auf extra Umstellen
+Close #14 - Übersetzungen für die neuen Exception-Typen erstellen Close #13 - Exceptionhandling verbesssern
+Close #16 - OnHandleUploadedFileListenerTest implementieren Close #15 - Tests für Services schreiben Close #12 - Fassade für Dateisystemzugriffe schreiben
+Close #11 - Das Feld errors aus den Events entfernen
+Close #1 - Fehler von String auf Exceptions umstellen
+Close #4 - Löschen der Einträge aus der compooser.json implementieren
+Close #9 - composer.json wird nicht richtig gespeichert
+Close #10 - In der composer.json werden alle Slashes maskiert
+Close #3 - Namen der Datenabnkfelder aus den Events beziehen
+Close #8 - Behandlung von JSON-Dateien ohne gültige Abschnitte implementieren Close #5 - Anzeige der Paketnamen in der Liste im BE implmentieren
+Close #7 - POC mit Events richtig implementieren Close #2 - Ausgabetemplate anpassen
+INITIALER COMMIT
+

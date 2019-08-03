@@ -16,12 +16,13 @@ use Doctrine\DBAL\Driver\Statement;
 use Doctrine\DBAL\Query\QueryBuilder;
 use Esit\Composertoolbox\Classes\Events\Import\OnHandleDatabaseQueriesEvent;
 use Esit\Composertoolbox\Classes\Listener\Import\OnHandleDatabaseQueriesListener;
+use Esit\Composertoolbox\EsitTestCase;
 
 /**
  * Class OnHandleDatabaseQueriesListenerTest
  * @package Esit\Composertoolbox\Tests\Listener\Import
  */
-class OnHandleDatabaseQueriesListenerTest extends \EsitTestCase
+class OnHandleDatabaseQueriesListenerTest extends EsitTestCase
 {
 
 
