@@ -1,4 +1,4 @@
-# Esit\ComposerToolbox
+# Esit\ComposerToolbox [DEPRECATED]
 
 by [e@sy Solution IT](https://easySolutionsIT.de)
 
